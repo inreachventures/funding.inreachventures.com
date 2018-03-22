@@ -1,0 +1,190 @@
+import React from 'react';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {RouteComponentProps} from 'react-router';
+import {path} from 'ramda';
+
+import {FormConsumer} from '../FormContext';
+
+import theme, {colors} from '../../lib/theme';
+import logo from '../../images/logo.png';
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1
+  },
+  header: {
+    flexDirection: 'row'
+  },
+  headerLinks: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  headerLink: {
+    ...theme.color.green,
+    marginHorizontal: 16,
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  logo: {
+    margin: 16,
+    borderRadius: 4
+  },
+  title: {
+    ...theme.text.title,
+    ...theme.color.green,
+    fontSize: 48,
+    textAlign: 'center',
+    margin: 8
+  },
+  summary: {
+    ...theme.color.greenMuted,
+    margin: 16,
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  getStarted: {
+    width: 180,
+    margin: 16
+  },
+  terms: {
+    ...theme.color.greenMuted,
+    fontSize: 12,
+    margin: 8,
+    textAlign: 'center'
+  },
+  link: {
+    textDecorationLine: 'underline',
+    color: colors.greenMuted
+  }
+});
+
+type Props = RouteComponentProps<{}>;
+
+export default class Landing extends React.Component<Props> {
+  render() {
+    return (
+      <View style={styles.main}>
+        <View style={styles.header}>
+          <Text
+            style={styles.headerLink}
+            {...{
+              accessibilityRole: 'link',
+              href: 'https://www.inreachventures.com',
+              target: '_blank'
+            }}
+          >
+            <Image
+              source={{width: 120, height: 60, uri: logo}}
+              resizeMode="contain"
+              style={styles.logo}
+            />
+          </Text>
+
+          <View style={styles.headerLinks}>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com#portfolio',
+                target: '_blank'
+              }}
+            >
+              Our Portfolio
+            </Text>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com#about',
+                target: '_blank'
+              }}
+            >
+              About Us
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Apply for an investment in{' '}
+            <FormConsumer>
+              {(f) => {
+                if (f.type === 'Success') {
+                  const companyName = path(
+                    ['data', 'answers', 'company_details', 'name'],
+                    f
+                  );
+
+                  if (companyName) {
+                    return <Text>{companyName}</Text>;
+                  }
+                }
+
+                return <Text>your company</Text>;
+              }}
+            </FormConsumer>
+          </Text>
+
+          <Text style={styles.summary}>
+            The questions we ask have been carefully crafted to create an
+            accurate profile of your company.<br />From that, we will give you
+            an investment decision &mdash; and feedback &mdash; within seven
+            days.
+          </Text>
+
+          <FormConsumer>
+            {(f) => {
+              if (f.type === 'Success') {
+                return (
+                  <View style={styles.getStarted}>
+                    <Button
+                      onPress={() => {
+                        this.props.history.push('/form');
+                      }}
+                      title="get started"
+                      color={colors.green}
+                    />
+                  </View>
+                );
+              }
+
+              return (
+                <View style={styles.getStarted}>
+                  <Button
+                    onPress={() => {
+                      this.props.history.push('/auth');
+                    }}
+                    title="get started"
+                    color={colors.green}
+                  />
+                </View>
+              );
+            }}
+          </FormConsumer>
+
+          <Text style={styles.terms}>
+            By proceeding to submit information to us you agree to our{' '}
+            <Text
+              style={styles.link}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com/terms',
+                title: 'Terms of Use',
+                target: '_blank'
+              }}
+            >
+              Terms of Use
+            </Text>
+          </Text>
+        </View>
+      </View>
+    );
+  }
+}
