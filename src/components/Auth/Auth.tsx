@@ -10,9 +10,11 @@ import {
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEnvelope} from '@fortawesome/fontawesome-free-solid';
+import {faLinkedin} from '@fortawesome/fontawesome-free-brands';
 
 import Navigation from '../Navigation';
 
+import {apiHost} from '../../lib/config';
 import * as auth from '../../api/auth';
 import {colors} from '../../lib/theme';
 
@@ -21,9 +23,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   inner: {
-    flexBasis: 480,
+    maxWidth: 640,
     flexShrink: 1,
+    flexWrap: 'wrap',
     marginHorizontal: 'auto'
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    margin: 8
   },
   explanation: {
     marginVertical: 16,
@@ -46,6 +54,17 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 16,
     color: 'white'
+  },
+  linkedIn: {
+    backgroundColor: colors.blueLinkedIn,
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22,
+    padding: 16,
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 32
   },
   emailLabel: {
     flex: 1,
@@ -70,7 +89,7 @@ const styles = StyleSheet.create({
     padding: 16
   },
   sendLabel: {
-    backgroundColor: colors.blueLight,
+    backgroundColor: colors.green,
     padding: 16
   },
   buttonLabelText: {
@@ -163,6 +182,23 @@ export default class Auth extends React.Component<Props, State> {
         ) : null}
 
         <View style={styles.inner}>
+          <Text style={styles.header}>How do you want to sign in?</Text>
+
+          <Text style={styles.explanation}>
+            Save time by letting us pre-fill information &ndash; such as your
+            name &ndash; from your LinkedIn profile.
+          </Text>
+
+          <Text
+            style={styles.linkedIn}
+            {...{
+              accessibilityRole: 'link',
+              href: `${apiHost}/linkedin`
+            }}
+          >
+            <FontAwesomeIcon icon={faLinkedin} /> Sign in with LinkedIn
+          </Text>
+
           <Text style={styles.explanation}>
             Enter your email address and we will send you a link to get into
             your form.

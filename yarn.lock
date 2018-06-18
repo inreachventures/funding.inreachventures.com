@@ -445,9 +445,9 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-react-native-web@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.7.3.tgz#d3d560c380fc98cf4fba55680c165eaeb0d62f37"
+babel-plugin-react-native-web@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.8.4.tgz#7d87c72384040f557239bde44715a5d6adaa496d"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -3547,9 +3547,9 @@ react-loadable@^5.3.1:
   dependencies:
     prop-types "^15.5.0"
 
-react-native-web@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.7.3.tgz#a970b8a618d14d4e4a9e42c8e9a591e5d7cf1bae"
+react-native-web@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.8.4.tgz#0555f99bff8d90674e9b4b4d414ad5c2272bdb12"
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
