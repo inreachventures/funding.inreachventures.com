@@ -1,5 +1,12 @@
 import React from 'react';
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {path} from 'ramda';
 
@@ -7,6 +14,7 @@ import {FormConsumer} from '../FormContext';
 
 import theme, {colors} from '../../lib/theme';
 import logo from '../../images/logo.png';
+import map from '../../images/map.png';
 
 const styles = StyleSheet.create({
   main: {
@@ -31,6 +39,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  contentWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    borderRadius: 16,
+    shadowColor: 'white',
+    shadowRadius: 32
   },
   logo: {
     margin: 16,
@@ -70,7 +86,11 @@ type Props = RouteComponentProps<{}>;
 export default class Landing extends React.Component<Props> {
   render() {
     return (
-      <View style={styles.main}>
+      <ImageBackground
+        source={{uri: map}}
+        style={styles.main}
+        resizeMode="cover"
+      >
         <View style={styles.header}>
           <Text
             style={styles.headerLink}
@@ -112,79 +132,81 @@ export default class Landing extends React.Component<Props> {
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>
-            Apply for an investment in{' '}
+          <View style={styles.contentWrapper}>
+            <Text style={styles.title}>
+              Apply for an investment in{' '}
+              <FormConsumer>
+                {(f) => {
+                  if (f.type === 'Success') {
+                    const companyName = path(
+                      ['data', 'answers', 'company_details', 'name'],
+                      f
+                    );
+
+                    if (companyName) {
+                      return <Text>{companyName}</Text>;
+                    }
+                  }
+
+                  return <Text>your company</Text>;
+                }}
+              </FormConsumer>
+            </Text>
+
+            <Text style={styles.summary}>
+              The questions we ask have been carefully crafted to create an
+              accurate profile of your company.<br />From that, we will give you
+              an investment decision &mdash; and feedback &mdash; within seven
+              days.
+            </Text>
+
             <FormConsumer>
               {(f) => {
                 if (f.type === 'Success') {
-                  const companyName = path(
-                    ['data', 'answers', 'company_details', 'name'],
-                    f
+                  return (
+                    <View style={styles.getStarted}>
+                      <Button
+                        onPress={() => {
+                          this.props.history.push('/form');
+                        }}
+                        title="get started"
+                        color={colors.green}
+                      />
+                    </View>
                   );
-
-                  if (companyName) {
-                    return <Text>{companyName}</Text>;
-                  }
                 }
 
-                return <Text>your company</Text>;
-              }}
-            </FormConsumer>
-          </Text>
-
-          <Text style={styles.summary}>
-            The questions we ask have been carefully crafted to create an
-            accurate profile of your company.<br />From that, we will give you
-            an investment decision &mdash; and feedback &mdash; within seven
-            days.
-          </Text>
-
-          <FormConsumer>
-            {(f) => {
-              if (f.type === 'Success') {
                 return (
                   <View style={styles.getStarted}>
                     <Button
                       onPress={() => {
-                        this.props.history.push('/form');
+                        this.props.history.push('/auth');
                       }}
                       title="get started"
                       color={colors.green}
                     />
                   </View>
                 );
-              }
-
-              return (
-                <View style={styles.getStarted}>
-                  <Button
-                    onPress={() => {
-                      this.props.history.push('/auth');
-                    }}
-                    title="get started"
-                    color={colors.green}
-                  />
-                </View>
-              );
-            }}
-          </FormConsumer>
-
-          <Text style={styles.terms}>
-            By proceeding to submit information to us you agree to our{' '}
-            <Text
-              style={styles.link}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com/terms',
-                title: 'Terms of Use',
-                target: '_blank'
               }}
-            >
-              Terms of Use
+            </FormConsumer>
+
+            <Text style={styles.terms}>
+              By proceeding to submit information to us you agree to our{' '}
+              <Text
+                style={styles.link}
+                {...{
+                  accessibilityRole: 'link',
+                  href: 'https://www.inreachventures.com/terms',
+                  title: 'Terms of Use',
+                  target: '_blank'
+                }}
+              >
+                Terms of Use
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
