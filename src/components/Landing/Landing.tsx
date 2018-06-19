@@ -3,6 +3,8 @@ import {
   Button,
   Image,
   ImageBackground,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
+    flexShrink: 0,
     flexDirection: 'row'
   },
   headerLinks: {
@@ -36,11 +39,14 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   content: {
-    flex: 1,
+    flex: 1
+  },
+  contentContainer: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  contentWrapper: {
+  contentInner: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(255,255,255,0.75)',
@@ -91,7 +97,7 @@ export default class Landing extends React.Component<Props> {
         style={styles.main}
         resizeMode="cover"
       >
-        <View style={styles.header}>
+        <SafeAreaView style={styles.header}>
           <Text
             style={styles.headerLink}
             {...{
@@ -129,10 +135,13 @@ export default class Landing extends React.Component<Props> {
               About Us
             </Text>
           </View>
-        </View>
+        </SafeAreaView>
 
-        <View style={styles.content}>
-          <View style={styles.contentWrapper}>
+        <ScrollView
+          style={styles.content}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <SafeAreaView style={styles.contentInner}>
             <Text style={styles.title}>
               Apply for an investment in{' '}
               <FormConsumer>
@@ -204,8 +213,8 @@ export default class Landing extends React.Component<Props> {
                 Terms of Use
               </Text>
             </Text>
-          </View>
-        </View>
+          </SafeAreaView>
+        </ScrollView>
       </ImageBackground>
     );
   }
