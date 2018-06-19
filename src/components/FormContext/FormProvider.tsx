@@ -1,6 +1,7 @@
 import React from 'react';
 import {debounce} from 'lodash';
 import {set, lensPath} from 'ramda';
+import Raven from 'raven-js';
 
 import FormContext from './FormContext';
 
@@ -60,7 +61,11 @@ export default class FormProvider extends React.Component<{}, State> {
         });
       })
       .catch((error) => {
-        console.error(error);
+        if (Raven.isSetup()) {
+          Raven.captureException(error);
+        } else {
+          console.error(error);
+        }
 
         this.setState({type: 'Failure', error: error.message});
       });
