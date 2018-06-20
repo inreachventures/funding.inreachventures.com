@@ -13,6 +13,7 @@ import {faEnvelope} from '@fortawesome/fontawesome-free-solid';
 import {faLinkedin} from '@fortawesome/fontawesome-free-brands';
 
 import Navigation from '../Navigation';
+import Terms from '../Terms';
 
 import {apiHost} from '../../lib/config';
 import * as auth from '../../api/auth';
@@ -241,6 +242,8 @@ export default class Auth extends React.Component<Props, State> {
             )}
           </View>
         </View>
+
+        <Terms />
       </View>
     );
   }

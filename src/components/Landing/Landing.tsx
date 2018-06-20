@@ -13,6 +13,7 @@ import {RouteComponentProps} from 'react-router';
 import {path} from 'ramda';
 
 import {FormConsumer} from '../FormContext';
+import Terms from '../Terms';
 
 import theme, {colors} from '../../lib/theme';
 import logo from '../../images/logo.png';
@@ -199,20 +200,7 @@ export default class Landing extends React.Component<Props> {
               }}
             </FormConsumer>
 
-            <Text style={styles.terms}>
-              By proceeding to submit information to us you agree to our{' '}
-              <Text
-                style={styles.link}
-                {...{
-                  accessibilityRole: 'link',
-                  href: 'https://www.inreachventures.com/terms',
-                  title: 'Terms of Use',
-                  target: '_blank'
-                }}
-              >
-                Terms of Use
-              </Text>
-            </Text>
+            <Terms />
           </SafeAreaView>
         </ScrollView>
       </ImageBackground>
