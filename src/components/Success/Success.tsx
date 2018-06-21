@@ -3,7 +3,7 @@ import {Button, StyleSheet, Text, View} from 'react-native';
 import {RouteComponentProps} from 'react-router';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCheckCircle} from '@fortawesome/fontawesome-free-solid';
+import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 
 import Navigation from '../Navigation';
 

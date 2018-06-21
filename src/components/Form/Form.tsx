@@ -8,11 +8,9 @@ import {
 } from 'react-native';
 import {Redirect, RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faCheckCircle,
-  faArrowCircleLeft,
-  faArrowCircleRight
-} from '@fortawesome/fontawesome-free-solid';
+import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
+import faArrowCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowCircleLeft';
+import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight';
 
 import {FormProvider, FormConsumer} from '../FormContext';
 import Navigation from '../Navigation';

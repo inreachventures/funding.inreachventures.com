@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEnvelope} from '@fortawesome/fontawesome-free-solid';
-import {faLinkedin} from '@fortawesome/fontawesome-free-brands';
+import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
+import faLinkedin from '@fortawesome/fontawesome-free-brands/faLinkedin';
 
 import Navigation from '../Navigation';
 import Terms from '../Terms';

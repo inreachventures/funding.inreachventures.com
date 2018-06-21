@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Route, withRouter, RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faHome} from '@fortawesome/fontawesome-free-solid';
+import faHome from '@fortawesome/fontawesome-free-solid/faHome';
 
 import {colors} from '../../lib/theme';
 
