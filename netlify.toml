@@ -1,0 +1,25 @@
+[Settings]
+  ID = "d2b722a4-6f9d-4a8b-97a0-08c9c6221158"
+
+[build]
+  command = "yarn run build && cp src/_redirects dist"
+  publish = "dist/"
+
+[context.production.environment]
+  API_HOST = "https://api.inreach.app"
+  SENTRY_DSN = "https://73fbb3a2ad3244d08f0bbfb15610c649@sentry.io/1228772"
+
+[context.development.environment]
+  HOST = "https://funding-dev.inreach.app"
+  API_HOST = "https://api-dev.inreach.app"
+
+[[redirects]]
+  from = "/in"
+  to = "https://api.inreach.app/auth?token=:token&redirect=:redirect"
+  query = {redirect = ":redirect", token = ":token"}
+  status = 302
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

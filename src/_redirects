@@ -1,2 +1,0 @@
-/in token=:token redirect=:redirect  https://api.inreach.app/auth?token=:token&redirect=:redirect  302
-/*                                   /index.html                                                   200

@@ -13,7 +13,7 @@
     "start": "parcel -p 3000 src/index.html",
     "prettier": "prettier --write 'src/**/*.{tx,tsx}'",
     "precommit": "lint-staged",
-    "deploy": "cp src/_redirects dist && npx netlify-cli deploy",
+    "deploy": "npx netlify-cli deploy",
     "test": "jest"
   },
   "lint-staged": {
