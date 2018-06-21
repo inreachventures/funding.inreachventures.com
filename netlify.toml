@@ -2,7 +2,7 @@
   ID = "d2b722a4-6f9d-4a8b-97a0-08c9c6221158"
 
 [build]
-  command = "yarn run build && cp src/_redirects dist"
+  command = "yarn run build"
   publish = "dist/"
 
 [context.production.environment]
