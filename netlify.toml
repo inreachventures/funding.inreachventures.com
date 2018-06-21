@@ -5,6 +5,9 @@
   command = "yarn run build"
   publish = "dist/"
 
+[build.environment]
+  YARN_VERSION = "1.7.0"
+
 [context.production.environment]
   API_HOST = "https://api.inreach.app"
   SENTRY_DSN = "https://73fbb3a2ad3244d08f0bbfb15610c649@sentry.io/1228772"
