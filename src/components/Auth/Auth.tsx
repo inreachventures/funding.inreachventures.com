@@ -222,7 +222,7 @@ export default class Auth extends React.Component<Props, State> {
               onChangeText={this.handleChangeEmail}
               placeholder="name@example.com"
               keyboardType="email-address"
-              editable={this.state.status === 'Initial'}
+              editable={this.state.status !== 'Loading'}
             />
 
             {this.state.status === 'Loading' ? (
