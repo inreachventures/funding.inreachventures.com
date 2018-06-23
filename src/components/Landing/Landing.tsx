@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 import {RouteComponentProps} from 'react-router';
-import {path} from 'ramda';
+import {pathOr} from 'ramda';
 
 import {FormConsumer} from '../FormContext';
 import Terms from '../Terms';
@@ -147,18 +147,24 @@ export default class Landing extends React.Component<Props> {
               Apply for an investment in{' '}
               <FormConsumer>
                 {(f) => {
-                  if (f.type === 'Success') {
-                    const companyName = path(
-                      ['data', 'answers', 'company_details', 'name'],
-                      f
-                    );
+                  const companyName = pathOr(
+                    'your company',
+                    [
+                      'data',
+                      'sections',
+                      0,
+                      'questions',
+                      0,
+                      'fields',
+                      0,
+                      'fields',
+                      0,
+                      'value'
+                    ],
+                    f
+                  );
 
-                    if (companyName) {
-                      return <Text>{companyName}</Text>;
-                    }
-                  }
-
-                  return <Text>your company</Text>;
+                  return <Text>{companyName}</Text>;
                 }}
               </FormConsumer>
             </Text>
