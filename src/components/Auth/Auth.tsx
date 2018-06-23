@@ -15,9 +15,11 @@ import faLinkedin from '@fortawesome/fontawesome-free-brands/faLinkedin';
 import Navigation from '../Navigation';
 import Terms from '../Terms';
 
-import {apiHost} from '../../lib/config';
+import {host, apiHost} from '../../lib/config';
 import * as auth from '../../api/auth';
 import {colors} from '../../lib/theme';
+
+const liqs = new URLSearchParams({redirect: `${host}/form`} as any);
 
 const styles = StyleSheet.create({
   container: {
@@ -124,10 +126,6 @@ export default class Auth extends React.Component<Props, State> {
 
   private email!: TextInput;
 
-  linkedIn = () => {
-    this.props.history.push('/linkedin');
-  };
-
   signIn = () => {
     const {email} = this.state;
 
@@ -194,7 +192,7 @@ export default class Auth extends React.Component<Props, State> {
             style={styles.linkedIn}
             {...{
               accessibilityRole: 'link',
-              href: `${apiHost}/linkedin`
+              href: `${apiHost}/linkedin?${liqs}`
             }}
           >
             <FontAwesomeIcon icon={faLinkedin} /> Sign in with LinkedIn
