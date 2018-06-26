@@ -63,9 +63,9 @@
   version "10.3.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.3.tgz#8798d9e39af2fa604f715ee6a6b19796528e46c3"
 
-"@types/ramda@^0.25.32":
-  version "0.25.33"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.33.tgz#a134fde6da3be303a1bdefd9155d8365bb7b14ec"
+"@types/ramda@^0.25.34":
+  version "0.25.34"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.34.tgz#6fae4a009123c2db810711b416da9b597cc5c54c"
 
 "@types/react-dom@^16.0.4":
   version "16.0.6"
@@ -81,9 +81,9 @@
     "@types/react" "*"
     "@types/webpack" "*"
 
-"@types/react-native@^0.55.16":
-  version "0.55.22"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.22.tgz#14193cc3b2e362e0408a54900855c0111c600caa"
+"@types/react-native@^0.55.25":
+  version "0.55.25"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.25.tgz#68484f8c3f1ab0ccce21ea556dcbcf20140f0c63"
   dependencies:
     "@types/react" "*"
 
@@ -102,9 +102,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-router@^4.0.26":
-  version "4.0.26"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.0.26.tgz#4489c873642baa633014294a6d0a290001ba9860"
+"@types/react-router@^4.0.27":
+  version "4.0.27"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.0.27.tgz#553f54df7c4b09d6046b0201ce9b91c46b2940e3"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -115,9 +115,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/react@^16.3.16":
-  version "16.4.1"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.1.tgz#c53bbfb4a78933db587da085ac60dbf5fcf73f8f"
+"@types/react@^16.4.2":
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.2.tgz#f1a9cf1ee85221530def2ac26aee20f910a9dac8"
   dependencies:
     csstype "^2.2.0"
 
@@ -451,9 +451,9 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-react-native-web@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.8.4.tgz#7d87c72384040f557239bde44715a5d6adaa496d"
+babel-plugin-react-native-web@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.8.5.tgz#61b1bc9b610218ebc95d5f6065dcb9250e0e3111"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -3035,9 +3035,9 @@ pako@~1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
 
-parcel@^1.9.2:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.9.2.tgz#03eadaa90c0cc160278b144733d1c41febc84d34"
+parcel@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.9.3.tgz#b9d15b373b9665c46b4d59faa8a17d3feaf49ada"
   dependencies:
     ansi-to-html "^0.6.4"
     babel-code-frame "^6.26.0"
@@ -3428,9 +3428,9 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
-prettier@^1.13.4:
-  version "1.13.5"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.5.tgz#7ae2076998c8edce79d63834e9b7b09fead6bfd0"
+prettier@^1.13.6:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.6.tgz#00ae0b777ad92f81a9e7a1df2f0470b6dab0cb44"
 
 pretty-format@^23.0.1:
   version "23.0.1"
@@ -3592,9 +3592,9 @@ react-loadable@^5.3.1:
   dependencies:
     prop-types "^15.5.0"
 
-react-native-web@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.8.4.tgz#0555f99bff8d90674e9b4b4d414ad5c2272bdb12"
+react-native-web@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.8.5.tgz#c11d1eccd18d9a0be87e0ddceaa8a6c6e2375637"
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
