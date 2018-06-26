@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 import {RouteComponentProps} from 'react-router';
-import {pathOr} from 'ramda';
+import {ifElse, compose, pathOr, trim, always, identity, isEmpty} from 'ramda';
 
 import {FormConsumer} from '../FormContext';
 import Terms from '../Terms';
@@ -147,9 +147,10 @@ export default class Landing extends React.Component<Props> {
               Apply for an investment in{' '}
               <FormConsumer>
                 {(f) => {
-                  const companyName = pathOr(
-                    'your company',
-                    [
+                  const companyName = compose(
+                    ifElse(isEmpty, always('your company'), identity),
+                    trim,
+                    pathOr('', [
                       'data',
                       'sections',
                       0,
@@ -160,9 +161,8 @@ export default class Landing extends React.Component<Props> {
                       'fields',
                       0,
                       'value'
-                    ],
-                    f
-                  );
+                    ])
+                  )(f);
 
                   return <Text>{companyName}</Text>;
                 }}
