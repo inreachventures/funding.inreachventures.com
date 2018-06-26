@@ -9,23 +9,18 @@
   YARN_VERSION = "1.7.0"
 
 [context.production.environment]
-  HOST = "https://funding.inreach.app"
-  API_HOST = "https://api.inreach.app"
+  HOST = "https://funding.inreachventures.com"
+  API_HOST = "https://api.funding.inreachventures.com"
   SENTRY_DSN = "https://73fbb3a2ad3244d08f0bbfb15610c649@sentry.io/1228772"
 
 [context.development.environment]
-  HOST = "https://dev.funding.inreachventures.com"
+  HOST = "https://development.funding.inreachventures.com"
   API_HOST = "https://api-dev.funding.inreachventures.com"
 
-# [[redirect]]
-#   from = "https://funding.inreach.app"
-#   to = "https://funding.inreachventures.com"
-#   status = 302
-
-# [[redirect]]
-#   from = "https://funding.inreach.app/*"
-#   to = "https://funding.inreachventures.com/:splat"
-#   status = 200
+[[redirect]]
+  from = "https://funding.inreach.app/*"
+  to = "https://funding.inreachventures.com/:splat"
+  status = 301
 
 [[redirects]]
   from = "/auth"
@@ -35,7 +30,7 @@
 
 [[redirects]]
   from = "/in"
-  to = "https://api.inreach.app/auth?token=:token&redirect=:redirect"
+  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=:redirect"
   query = {redirect = ":redirect", token = ":token"}
   status = 302
 
