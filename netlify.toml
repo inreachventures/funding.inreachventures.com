@@ -17,9 +17,10 @@
   HOST = "https://development.funding.inreachventures.com"
   API_HOST = "https://api-dev.funding.inreachventures.com"
 
-[[redirect]]
+[[redirects]]
   from = "https://funding.inreach.app/*"
   to = "https://funding.inreachventures.com/:splat"
+  force = true
   status = 301
 
 [[redirects]]
