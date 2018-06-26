@@ -4,7 +4,8 @@ import {
   TouchableHighlight,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  GestureResponderEvent
 } from 'react-native';
 import {Route, withRouter, RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -115,6 +116,12 @@ class Navigation extends React.Component<NavigationProps> {
     }
   };
 
+  goHome = (e: GestureResponderEvent) => {
+    e.preventDefault();
+
+    this.props.history.push('/');
+  };
+
   componentDidUpdate() {
     this.setTitle();
   }
@@ -124,14 +131,14 @@ class Navigation extends React.Component<NavigationProps> {
   }
 
   render() {
-    const {match, history, links, style = {}} = this.props;
+    const {match, links, style = {}} = this.props;
 
     return (
       <View style={[styles.wrapper, style]}>
         <View style={styles.navigation}>
           <TouchableHighlight
             style={styles.iconLink}
-            onPress={() => history.push('/')}
+            onPress={this.goHome}
             underlayColor="transparent"
             activeOpacity={0.7}
           >
