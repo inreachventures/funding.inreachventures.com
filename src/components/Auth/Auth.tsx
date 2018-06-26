@@ -1,23 +1,15 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
 import faLinkedin from '@fortawesome/fontawesome-free-brands/faLinkedin';
 
+import {colors} from '../../lib/theme';
+import {apiHost, host} from '../../lib/config';
+
 import Navigation from '../Navigation';
 import Terms from '../Terms';
-
-import {host, apiHost} from '../../lib/config';
-import * as auth from '../../api/auth';
-import {colors} from '../../lib/theme';
 
 const liqs = new URLSearchParams({redirect: `${host}/form`} as any);
 
@@ -25,142 +17,112 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  inner: {
-    maxWidth: 640,
-    flexShrink: 1,
-    flexWrap: 'wrap',
-    marginHorizontal: 'auto'
-  },
-  header: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    margin: 8
-  },
-  explanation: {
-    marginVertical: 16,
-    fontSize: 18,
-    marginHorizontal: 8
-  },
-  controls: {
-    marginVertical: 16,
-    borderRadius: 8,
-    overflow: 'hidden',
-    marginHorizontal: 8
-  },
-  labelWithIcon: {
+  auth: {
+    paddingVertical: 32,
+    paddingHorizontal: 12,
     flexDirection: 'row'
   },
-  envelope: {
-    backgroundColor: colors.blueDark,
+  authContentContainer: {
+    flexBasis: 640,
+    flexShrink: 1,
+    marginHorizontal: 'auto',
+    marginVertical: 'auto'
+  },
+  authContent: {
+    padding: 12,
+    backgroundColor: colors.greenLightMuted,
+    shadowRadius: 32,
+    shadowColor: colors.greenDark,
+    shadowOpacity: 0.4,
+    borderRadius: 4
+  },
+  authOption: {
+    marginVertical: 8
+  },
+  authOptionText: {
+    marginVertical: 4,
+    marginHorizontal: 12
+  },
+  terms: {
+    marginVertical: 12
+  }
+});
+
+const navStyles = StyleSheet.create({
+  view: {flex: 1, justifyContent: 'center'},
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
+});
+
+const dividerStyles = StyleSheet.create({
+  view: {
+    margin: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  line: {
+    flex: 1,
+    height: 2,
+    backgroundColor: colors.green
+  },
+  text: {
+    marginHorizontal: 8,
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+});
+
+const headerStyles = StyleSheet.create({
+  view: {
+    padding: 12
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold'
+  }
+});
+
+const authLinkStyles = StyleSheet.create({
+  view: {
+    display: 'flex',
+    padding: 12,
+    margin: 4,
+    borderRadius: 4,
+    flexDirection: 'row'
+  },
+  icon: {
+    color: 'white',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22,
-    padding: 16,
-    color: 'white'
+    fontSize: 18,
+    marginRight: 8
+  },
+  text: {
+    color: 'white',
+    fontSize: 18,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   linkedIn: {
-    backgroundColor: colors.blueLinkedIn,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 22,
-    padding: 16,
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 32
+    backgroundColor: colors.blueLinkedIn
   },
-  emailLabel: {
-    flex: 1,
-    backgroundColor: colors.blueDark,
-    padding: 16,
-    fontSize: 22,
-    color: 'white'
-  },
-  emailInput: {
-    margin: 0,
-    backgroundColor: colors.blueDark,
-    fontSize: 22,
-    padding: 16,
-    color: 'white'
-  },
-  loading: {
-    backgroundColor: colors.blueLight,
-    padding: 16
-  },
-  doneLabel: {
-    backgroundColor: colors.green,
-    padding: 16
-  },
-  sendLabel: {
-    backgroundColor: colors.green,
-    padding: 16
-  },
-  buttonLabelText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center'
-  },
-  error: {
-    zIndex: 0,
-    color: 'white',
-    backgroundColor: 'tomato',
-    fontSize: 22,
-    padding: 12,
-    textAlign: 'center'
+  email: {
+    backgroundColor: colors.blueDark
   }
 });
 
 type Props = RouteComponentProps<{}>;
 
-type State =
-  | {status: 'Initial'; email: string}
-  | {status: 'Loading'; email: string}
-  | {status: 'Failure'; email: string; error: string}
-  | {status: 'Success'; email: string};
-
-export default class Auth extends React.Component<Props, State> {
+export default class Auth extends React.Component<Props> {
   title = document.title;
 
-  state: State = {status: 'Initial', email: ''};
-
-  private email!: TextInput;
-
-  signIn = () => {
-    const {email} = this.state;
-
-    if (!email.trim()) {
-      this.setState({
-        status: 'Failure',
-        error: 'You must enter an email address',
-        email
-      });
-
-      return;
-    }
-
-    this.setState({status: 'Loading'}, () => {
-      auth
-        .sendLink(email)
-        .then(() => {
-          this.setState({status: 'Success', email: ''});
-        })
-        .catch(() => {
-          this.setState({
-            status: 'Failure',
-            error: 'Sending the link failed. Please try again.',
-            email
-          });
-        });
-    });
-  };
-
-  handleEmailLabelPress = () => {
-    this.email.focus();
-  };
-
-  handleChangeEmail = (email: string) => {
-    this.setState({status: 'Initial', email, error: ''});
+  handleEmailPress = () => {
+    this.props.history.push('/auth/email');
   };
 
   componentDidMount() {
@@ -173,77 +135,73 @@ export default class Auth extends React.Component<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Navigation />
+      <View style={[styles.container]}>
+        <Navigation>
+          <View style={navStyles.view}>
+            <Text style={navStyles.text}>Sign in</Text>
+          </View>
+        </Navigation>
 
-        {this.state.status === 'Failure' ? (
-          <Text style={styles.error}>{this.state.error}</Text>
-        ) : null}
+        <ScrollView
+          style={styles.auth}
+          contentContainerStyle={styles.authContentContainer}
+        >
+          <View style={styles.authContent}>
+            <View style={headerStyles.view}>
+              <Text style={headerStyles.text}>How shall we proceed?</Text>
+            </View>
 
-        <View style={styles.inner}>
-          <Text style={styles.header}>How do you want to sign in?</Text>
-
-          <Text style={styles.explanation}>
-            Save time by letting us pre-fill information &ndash; such as your
-            name &ndash; from your LinkedIn profile.
-          </Text>
-
-          <Text
-            style={styles.linkedIn}
-            {...{
-              accessibilityRole: 'link',
-              href: `${apiHost}/linkedin?${liqs}`
-            }}
-          >
-            <FontAwesomeIcon icon={faLinkedin} /> Sign in with LinkedIn
-          </Text>
-
-          <Text style={styles.explanation}>
-            Enter your email address and we will send you a link to get into
-            your form.
-          </Text>
-
-          <View style={styles.controls}>
-            <View style={styles.labelWithIcon}>
-              <Text style={styles.envelope}>
-                <FontAwesomeIcon icon={faEnvelope} />
-              </Text>
-
-              <Text
-                style={styles.emailLabel}
-                onPress={this.handleEmailLabelPress}
+            <View style={styles.authOption}>
+              <View
+                {...{
+                  accessibilityRole: 'link',
+                  href: `${apiHost}/linkedin?${liqs}`
+                }}
+                style={[authLinkStyles.view, authLinkStyles.linkedIn]}
               >
-                Email address
+                <Text style={authLinkStyles.icon}>
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </Text>
+
+                <Text style={[authLinkStyles.text]}>LinkedIn</Text>
+              </View>
+
+              <Text style={styles.authOptionText}>
+                Get started faster by using your LinkedIn account. If this is
+                your first time signing in, we will pre-fill some information
+                &mdash; such as your name &mdash; to save you time.
               </Text>
             </View>
-            <TextInput
-              style={styles.emailInput}
-              ref={(el) => (this.email = el as any)}
-              onChangeText={this.handleChangeEmail}
-              placeholder="name@example.com"
-              keyboardType="email-address"
-              editable={this.state.status !== 'Loading'}
-            />
 
-            {this.state.status === 'Loading' ? (
-              <View style={styles.loading}>
-                <ActivityIndicator color="white" size={26} />
-              </View>
-            ) : this.state.status === 'Success' ? (
-              <View style={styles.doneLabel}>
-                <Text style={styles.buttonLabelText}>Link sent</Text>
-              </View>
-            ) : (
-              <TouchableHighlight onPress={this.signIn}>
-                <View style={styles.sendLabel}>
-                  <Text style={styles.buttonLabelText}>Send</Text>
-                </View>
-              </TouchableHighlight>
-            )}
+            <View style={dividerStyles.view}>
+              <View style={dividerStyles.line} />
+              <Text style={dividerStyles.text}>OR</Text>
+              <View style={dividerStyles.line} />
+            </View>
+
+            <View style={styles.authOption}>
+              <Text
+                onPress={this.handleEmailPress}
+                style={[authLinkStyles.view, authLinkStyles.email]}
+              >
+                <Text style={authLinkStyles.icon}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </Text>
+
+                <Text style={[authLinkStyles.text]}>Email</Text>
+              </Text>
+
+              <Text style={styles.authOptionText}>
+                We will send you a link that takes you straight into your
+                funding form.
+              </Text>
+            </View>
           </View>
-        </View>
+        </ScrollView>
 
-        <Terms />
+        <View style={styles.terms}>
+          <Terms />
+        </View>
       </View>
     );
   }

@@ -131,7 +131,7 @@ class Navigation extends React.Component<NavigationProps> {
   }
 
   render() {
-    const {match, links, style = {}} = this.props;
+    const {match, links, style = {}, children} = this.props;
 
     return (
       <View style={[styles.wrapper, style]}>
@@ -158,6 +158,8 @@ class Navigation extends React.Component<NavigationProps> {
               ))}
             </ScrollView>
           ) : null}
+
+          {children}
         </View>
       </View>
     );
