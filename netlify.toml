@@ -39,3 +39,17 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; connect-src https://*.funding.inreachventures.com;"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; connect-src https://*.funding.inreachventures.com;"
+    Referrer-Policy = "strict-origin"
