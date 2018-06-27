@@ -25,7 +25,7 @@ export default class Terms extends React.Component {
           style={styles.link}
           {...{
             accessibilityRole: 'link',
-            href: 'https://www.inreachventures.com/terms',
+            href: 'https://www.inreachventures.com/legal/terms-and-conditions',
             title: 'Terms of Use',
             target: '_blank'
           }}
@@ -37,7 +37,8 @@ export default class Terms extends React.Component {
           style={styles.link}
           {...{
             accessibilityRole: 'link',
-            href: 'https://www.inreachventures.com/privacy',
+            href:
+              'https://www.inreachventures.com/legal/inreach-data-privacy-notice',
             title: 'InReach Data Privacy Notice',
             target: '_blank'
           }}
