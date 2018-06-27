@@ -234,6 +234,7 @@ export default class Auth extends React.Component<Props, State> {
                   accessibilityLabel="email address to receive sign in link"
                   style={inputStyles.input}
                   onChangeText={this.handleChangeEmail}
+                  onSubmitEditing={this.sendLink}
                   value={this.state.email}
                   placeholder="mail@example.com"
                   keyboardType="email-address"
