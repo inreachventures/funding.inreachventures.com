@@ -1,8 +1,14 @@
+import {fetch} from 'yetch';
+
 import {apiHost} from '../lib/config';
 import {Section} from '../lib/section';
 import {Submission} from '../lib/form';
 
-export const save = (id: string, sections: Section[]): Promise<Submission> =>
+export const save = (
+  id: string,
+  sections: Section[],
+  signal?: AbortSignal
+): Promise<Submission> =>
   fetch(`${apiHost}/form/${id}`, {
     method: 'PUT',
     credentials: 'include',
@@ -10,10 +16,15 @@ export const save = (id: string, sections: Section[]): Promise<Submission> =>
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({submission: {sections}})
+    body: JSON.stringify({submission: {sections}}),
+    signal
   }).then((res) => res.json());
 
-export const submit = (id: string, sections: Section[]): Promise<{}> =>
+export const submit = (
+  id: string,
+  sections: Section[],
+  signal?: AbortSignal
+): Promise<{}> =>
   fetch(`${apiHost}/form/${id}`, {
     method: 'PUT',
     credentials: 'include',
@@ -21,15 +32,17 @@ export const submit = (id: string, sections: Section[]): Promise<{}> =>
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({submission: {sections}, submit: true})
+    body: JSON.stringify({submission: {sections}, submit: true}),
+    signal
   }).then((res) => res.json());
 
-export const latest = (): Promise<Submission> =>
+export const latest = (signal?: AbortSignal): Promise<Submission> =>
   fetch(`${apiHost}/form`, {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
     headers: {
       Accept: 'application/json'
-    }
+    },
+    signal
   }).then((res) => res.json());

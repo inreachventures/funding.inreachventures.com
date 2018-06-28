@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native';
 import {isEmpty} from 'ramda';
+import {AbortController} from 'yetch';
 
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -148,6 +149,8 @@ export default class Auth extends React.Component<Props, State> {
 
   title = document.title;
 
+  controller = new AbortController();
+
   handleChangeEmail = (email: string) => {
     this.setState({type: 'Initial', email});
   };
@@ -177,15 +180,18 @@ export default class Auth extends React.Component<Props, State> {
       auth
         .sendLink(email)
         .then(() => {
-          this.setState({type: 'Success', email});
+          if (!this.controller.signal.aborted) {
+            this.setState({type: 'Success', email});
+          }
         })
-        .catch((error) => {
-          console.error(error);
-          this.setState({
-            type: 'Failure',
-            error: 'Could not send link. Try again.',
-            email
-          });
+        .catch(() => {
+          if (!this.controller.signal.aborted) {
+            this.setState({
+              type: 'Failure',
+              error: 'Could not send link. Try again.',
+              email
+            });
+          }
         });
     });
   };
@@ -196,6 +202,8 @@ export default class Auth extends React.Component<Props, State> {
 
   componentWillUnmount() {
     document.title = this.title;
+
+    this.controller.abort();
   }
 
   render() {
