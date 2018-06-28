@@ -9,7 +9,6 @@ import {
   View
 } from 'react-native';
 import {isEmpty} from 'ramda';
-import {AbortController} from 'yetch';
 
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';

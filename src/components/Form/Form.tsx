@@ -11,12 +11,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faArrowCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowCircleLeft';
 import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight';
+import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 
 import {FormConsumer} from '../FormContext';
 import Navigation from '../Navigation';
 import Section from '../Section';
+import Success from '../Success';
 
 import {colors} from '../../lib/theme';
+import {RemoteData} from '../../lib/remoteData';
 
 const styles = StyleSheet.create({
   form: {
@@ -30,6 +33,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   navigationButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
     borderColor: colors.green,
     borderWidth: 1,
     borderStyle: 'solid',
@@ -48,15 +53,10 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   error: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row'
   },
   errorMessage: {
-    flexBasis: 480,
-    flexShrink: 1,
+    flex: 1,
     backgroundColor: colors.red,
     color: 'white',
     fontSize: 24,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 });
 
 type NavigationButtonProps = {
-  type: 'back' | 'next' | 'submit';
+  type: 'back' | 'next' | 'submit' | 'submitting';
   onPress(): void;
   disabled?: boolean;
 };
@@ -87,6 +87,14 @@ function NavigationButton({
           Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Text>
       </TouchableHighlight>
+    );
+  }
+
+  if (type === 'submitting') {
+    return (
+      <Text style={[styles.navigationButton, styles.successButton]}>
+        Submit <FontAwesomeIcon icon={faSpinner} spin />
+      </Text>
     );
   }
 
@@ -129,7 +137,30 @@ function NavigationButton({
 
 type Props = RouteComponentProps<{section?: string}>;
 
+type State = RemoteData<string, null>;
+
 export default class Form extends React.Component<Props> {
+  state: State = {type: 'NotAsked'};
+
+  submit = (fn: () => Promise<{}>) => () => {
+    this.setState({type: 'Loading'}, () => {
+      fn()
+        .then(() => {
+          this.setState({type: 'Success', data: null});
+        })
+        .catch(() => {
+          this.setState({
+            type: 'Failure',
+            error: 'Submitting the form failed. Try again.'
+          });
+        });
+    });
+  };
+
+  dismiss = () => {
+    this.setState({type: 'Initial'});
+  };
+
   render() {
     const {
       match: {
@@ -137,6 +168,10 @@ export default class Form extends React.Component<Props> {
       },
       history
     } = this.props;
+
+    if (this.state.type === 'Success') {
+      return <Success dismiss={this.dismiss} />;
+    }
 
     return (
       <FormConsumer>
@@ -158,6 +193,12 @@ export default class Form extends React.Component<Props> {
                   style={styles.navigation}
                 />
 
+                {this.state.type === 'Failure' ? (
+                  <View>
+                    <Text style={styles.errorMessage}>{this.state.error}</Text>
+                  </View>
+                ) : null}
+
                 {section ? (
                   <Section
                     back={
@@ -174,12 +215,12 @@ export default class Form extends React.Component<Props> {
                     next={
                       index >= f.data.sections.length - 1 ? (
                         <NavigationButton
-                          type="submit"
-                          onPress={() => {
-                            f.data.submit().then(() => {
-                              history.push('/success');
-                            });
-                          }}
+                          type={
+                            this.state.type === 'Loading'
+                              ? 'submitting'
+                              : 'submit'
+                          }
+                          onPress={this.submit(f.data.submit)}
                         />
                       ) : (
                         <NavigationButton

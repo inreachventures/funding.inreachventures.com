@@ -1,10 +1,12 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+// import React from 'react';
+// import Loadable from 'react-loadable';
+//
+// import Loading from '../Loading';
+//
+// export default Loadable({
+//   loader: () => import('./Success'),
+//   loading: () => <Loading />,
+//   delay: 300
+// });
 
-import Loading from '../Loading';
-
-export default Loadable({
-  loader: () => import('./Success'),
-  loading: () => <Loading />,
-  delay: 300
-});
+export {default} from './Success';
