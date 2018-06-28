@@ -12,15 +12,13 @@ const styles = StyleSheet.create({
   section: {
     flex: 1
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
   title: {
     fontSize: 24,
     color: colors.green,
     fontWeight: 'bold',
-    marginVertical: 8
+    marginVertical: 8,
+    marginHorizontal: 8,
+    textAlign: 'center'
   },
   navigation: {
     flexDirection: 'row',
@@ -30,6 +28,8 @@ const styles = StyleSheet.create({
     flexBasis: 680,
     flexShrink: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 24,
     marginBottom: 12,
     paddingBottom: 12,
@@ -89,15 +89,13 @@ export default class Section extends React.Component<Props> {
           if (f.type === 'Success') {
             return (
               <SafeAreaView style={styles.section}>
-                <View style={styles.header}>
-                  <Text style={styles.title}>{title}</Text>
-                </View>
-
                 <View style={styles.navigation}>
                   <View style={styles.navigationControls}>
-                    {back ? <View style={styles.back}>{back}</View> : null}
+                    <View style={styles.back}>{back}</View>
 
-                    {next ? <View style={styles.next}>{next}</View> : null}
+                    <Text style={styles.title}>{title}</Text>
+
+                    <View style={styles.next}>{next}</View>
                   </View>
                 </View>
 

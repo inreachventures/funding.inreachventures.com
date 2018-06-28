@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 4
   },
+  navigationButtonDisabled: {
+    color: colors.greenLightMuted,
+    borderColor: colors.greenLightMuted
+  },
   successButton: {
     backgroundColor: colors.green,
     color: 'white'
@@ -64,12 +68,21 @@ const styles = StyleSheet.create({
 type NavigationButtonProps = {
   type: 'back' | 'next' | 'submit';
   onPress(): void;
+  disabled?: boolean;
 };
 
-function NavigationButton({type, onPress}: NavigationButtonProps) {
+function NavigationButton({
+  type,
+  onPress,
+  disabled = false
+}: NavigationButtonProps) {
   if (type === 'submit') {
     return (
-      <TouchableHighlight onPress={onPress} underlayColor="transparent">
+      <TouchableHighlight
+        disabled={disabled}
+        onPress={onPress}
+        underlayColor="transparent"
+      >
         <Text style={[styles.navigationButton, styles.successButton]}>
           Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Text>
@@ -79,8 +92,17 @@ function NavigationButton({type, onPress}: NavigationButtonProps) {
 
   if (type === 'back') {
     return (
-      <TouchableHighlight onPress={onPress} underlayColor="transparent">
-        <Text style={styles.navigationButton}>
+      <TouchableHighlight
+        disabled={disabled}
+        onPress={onPress}
+        underlayColor="transparent"
+      >
+        <Text
+          style={[
+            styles.navigationButton,
+            disabled ? styles.navigationButtonDisabled : {}
+          ]}
+        >
           <FontAwesomeIcon icon={faArrowCircleLeft} /> Back
         </Text>
       </TouchableHighlight>
@@ -88,8 +110,17 @@ function NavigationButton({type, onPress}: NavigationButtonProps) {
   }
 
   return (
-    <TouchableHighlight onPress={onPress} underlayColor="transparent">
-      <Text style={styles.navigationButton}>
+    <TouchableHighlight
+      disabled={disabled}
+      onPress={onPress}
+      underlayColor="transparent"
+    >
+      <Text
+        style={[
+          styles.navigationButton,
+          disabled ? styles.navigationButtonDisabled : {}
+        ]}
+      >
         Next <FontAwesomeIcon icon={faArrowCircleRight} />
       </Text>
     </TouchableHighlight>
@@ -130,30 +161,24 @@ export default class Form extends React.Component<Props> {
                 {section ? (
                   <Section
                     back={
-                      index > 0 ? (
-                        <NavigationButton
-                          type="back"
-                          onPress={() =>
-                            history.push(
-                              `/form/${f.data.sections[index - 1].path}`
-                            )
-                          }
-                        />
-                      ) : null
+                      <NavigationButton
+                        type="back"
+                        onPress={() =>
+                          history.push(
+                            `/form/${f.data.sections[index - 1].path}`
+                          )
+                        }
+                        disabled={index === 0}
+                      />
                     }
                     next={
                       index >= f.data.sections.length - 1 ? (
                         <NavigationButton
                           type="submit"
                           onPress={() => {
-                            f.data
-                              .submit()
-                              .then(() => {
-                                history.push('/success');
-                              })
-                              .catch((error) => {
-                                console.error(error);
-                              });
+                            f.data.submit().then(() => {
+                              history.push('/success');
+                            });
                           }}
                         />
                       ) : (
