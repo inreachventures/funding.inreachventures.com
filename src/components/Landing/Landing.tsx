@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Button,
   Image,
   ImageBackground,
@@ -10,12 +11,15 @@ import {
   View
 } from 'react-native';
 import {RouteComponentProps} from 'react-router';
+import {History} from 'history';
 import {ifElse, compose, pathOr, trim, always, identity, isEmpty} from 'ramda';
 
 import {FormConsumer} from '../FormContext';
 import Terms from '../Terms';
 
 import theme, {colors} from '../../lib/theme';
+import {Form} from '../../lib/form';
+import {RemoteData} from '../../lib/remoteData';
 import logo from '../../images/logo.png';
 import map from '../../images/map.png';
 
@@ -48,6 +52,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   contentInner: {
+    maxWidth: 800,
+    flexShrink: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(255,255,255,0.75)',
@@ -87,6 +93,78 @@ const styles = StyleSheet.create({
     color: colors.greenMuted
   }
 });
+
+const companyName = compose(
+  ifElse(isEmpty, always('your company'), identity),
+  trim,
+  pathOr('', [
+    'data',
+    'sections',
+    0,
+    'questions',
+    0,
+    'fields',
+    0,
+    'fields',
+    0,
+    'value'
+  ])
+);
+
+type RemoteForm = RemoteData<string, Form>;
+
+type GetStartedButtonProps = {
+  form: RemoteForm;
+  history: History;
+};
+
+function GetStartedButton({form, history}: GetStartedButtonProps) {
+  if (form.type === 'NotAsked' || form.type === 'Loading') {
+    return <ActivityIndicator size={24} />;
+  }
+
+  return (
+    <View style={styles.getStarted}>
+      <Button
+        onPress={() => {
+          history.push(form.type === 'Success' ? '/form' : '/auth');
+        }}
+        title="get started"
+        color={colors.green}
+      />
+    </View>
+  );
+}
+
+type GetStartedTitleProps = {
+  form: RemoteForm;
+};
+
+function GetStartedTitle({form}: GetStartedTitleProps) {
+  if (form.type === 'Success') {
+    return <Text style={styles.title}>Tell us about {companyName(form)}</Text>;
+  }
+
+  if (form.type === 'Failure') {
+    return <Text style={styles.title}>Looking for investment?</Text>;
+  }
+
+  return <ActivityIndicator size={32} />;
+}
+
+type GetStartedSummaryProps = {
+  form: RemoteForm;
+};
+
+function GetStartedSummary({form}: GetStartedSummaryProps) {
+  return (
+    <Text style={styles.summary}>
+      Answer our questions and produce an executive summary of{' '}
+      {companyName(form)}. From this, we&rsquo;ll give you an investment
+      decision &mdash; and feedback &mdash; within seven days.
+    </Text>
+  );
+}
 
 type Props = RouteComponentProps<{}>;
 
@@ -143,72 +221,20 @@ export default class Landing extends React.Component<Props> {
           contentContainerStyle={styles.contentContainer}
         >
           <SafeAreaView style={styles.contentInner}>
-            <Text style={styles.title}>
-              Apply for an investment in{' '}
-              <FormConsumer>
-                {(f) => {
-                  const companyName = compose(
-                    ifElse(isEmpty, always('your company'), identity),
-                    trim,
-                    pathOr('', [
-                      'data',
-                      'sections',
-                      0,
-                      'questions',
-                      0,
-                      'fields',
-                      0,
-                      'fields',
-                      0,
-                      'value'
-                    ])
-                  )(f);
-
-                  return <Text>{companyName}</Text>;
-                }}
-              </FormConsumer>
-            </Text>
-
-            <Text style={styles.summary}>
-              The questions we ask have been carefully crafted to create an
-              accurate profile of your company.<br />From that, we will give you
-              an investment decision &mdash; and feedback &mdash; within seven
-              days.
-            </Text>
-
             <FormConsumer>
-              {(f) => {
-                if (f.type === 'Success') {
-                  return (
-                    <View style={styles.getStarted}>
-                      <Button
-                        onPress={() => {
-                          this.props.history.push('/form');
-                        }}
-                        title="get started"
-                        color={colors.green}
-                      />
-                    </View>
-                  );
-                }
+              {(f) => (
+                <React.Fragment>
+                  <GetStartedTitle form={f} />
 
-                return (
-                  <View style={styles.getStarted}>
-                    <Button
-                      onPress={() => {
-                        this.props.history.push('/auth');
-                      }}
-                      title="get started"
-                      color={colors.green}
-                    />
-                  </View>
-                );
-              }}
+                  <GetStartedSummary form={f} />
+
+                  <GetStartedButton form={f} history={this.props.history} />
+                </React.Fragment>
+              )}
             </FormConsumer>
-
-            <Terms />
           </SafeAreaView>
         </ScrollView>
+        <Terms />
       </ImageBackground>
     );
   }
