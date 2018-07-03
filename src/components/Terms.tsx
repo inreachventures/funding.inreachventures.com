@@ -20,7 +20,8 @@ export default class Terms extends React.Component {
   render() {
     return (
       <Text style={styles.terms}>
-        By submitting information to us you agree to our{' '}
+        By entering information (including where you partially complete any
+        questions) you agree to our{' '}
         <Text
           style={styles.link}
           {...{
