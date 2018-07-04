@@ -1,4 +1,4 @@
-import {fetch} from 'yetch';
+import {fetch, AbortSignal} from 'yetch';
 
 import {apiHost} from '../lib/config';
 import {Section} from '../lib/section';

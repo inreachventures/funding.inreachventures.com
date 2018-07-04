@@ -1,4 +1,4 @@
-import {fetch} from 'yetch';
+import {fetch, AbortSignal} from 'yetch';
 
 import {host, apiHost} from '../lib/config';
 
