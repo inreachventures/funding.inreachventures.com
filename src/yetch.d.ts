@@ -1,5 +1,5 @@
-// Yetch polyfills `window.fetch` and `AbortController` so we assume the
-// implementation is faithful and reuse those type definitions
+// Yetch polyfills `window.fetch`,  `AbortController` and `AbortSignal` so we
+// assume the implementations are faithful and reuse those type definitions
 
 type AC = AbortController;
 type AS = AbortSignal;
