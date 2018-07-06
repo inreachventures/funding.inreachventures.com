@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native';
 import {isEmpty} from 'ramda';
+import {AbortController} from 'yetch';
 
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -148,7 +149,7 @@ export default class Auth extends React.Component<Props, State> {
 
   title = document.title;
 
-  controller = new AbortController();
+  controller: AbortController = new AbortController();
 
   handleChangeEmail = (email: string) => {
     this.setState({type: 'Initial', email});
