@@ -2,6 +2,8 @@ import React from 'react';
 import {Dimensions, StyleSheet, TextInput, Picker, Switch} from 'react-native';
 import {propOr} from 'ramda';
 
+import CurrencyInput from '../CurrencyInput';
+
 import {Field} from '../../lib/field';
 import {Path} from '../../lib/path';
 import {colors} from '../../lib/theme';
@@ -29,6 +31,10 @@ const styles = StyleSheet.create({
   }
 });
 
+function widthStyle(style: 'short' | 'med' | 'long') {
+  return [style === 'short' ? styles.short : style === 'med' ? styles.med : {}];
+}
+
 type Props = {
   editable?: boolean;
   onChange(path: Path, value: string): void;
@@ -37,13 +43,13 @@ type Props = {
   value?: string;
 };
 
-function widthStyle(style: 'short' | 'med' | 'long') {
-  return [style === 'short' ? styles.short : style === 'med' ? styles.med : {}];
-}
-
 export default class QuestionInput extends React.Component<Props> {
   handleChange = (value: string) => {
     this.props.onChange([...this.props.path, 'value'], value);
+  };
+
+  handleChangeCurrency = (currency: string) => {
+    this.props.onChange([...this.props.path, 'currency'], currency);
   };
 
   handleSwitch = (value: boolean) => {
@@ -137,6 +143,19 @@ export default class QuestionInput extends React.Component<Props> {
           style={[styles.input, styles.number]}
           onChangeText={this.handleChange}
           keyboardType="numeric"
+        />
+      );
+    }
+
+    if (field.type === 'currency') {
+      return (
+        <CurrencyInput
+          currency={field.currency}
+          editable={editable}
+          onChange={this.handleChange}
+          onChangeCurrency={this.handleChangeCurrency}
+          placeholder={field.placeholder}
+          value={field.value}
         />
       );
     }

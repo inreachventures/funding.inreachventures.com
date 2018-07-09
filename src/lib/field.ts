@@ -1,3 +1,5 @@
+import {Currency} from './currency';
+
 export type FieldCommon = {
   name: string;
   label?: string;
@@ -20,6 +22,7 @@ export type Field =
   | {type: 'uri'; placeholder?: string} & FieldCommon
   | {type: 'email-address'; placeholder?: string} & FieldCommon
   | {type: 'number'; min?: number; max?: number} & FieldCommon
+  | {type: 'currency'; currency: Currency; placeholder: string} & FieldCommon
   | {type: 'date'; min: Date; max: Date; placeholder?: string} & FieldCommon
   | {
       type: 'picker';
