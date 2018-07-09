@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
 
 function formatNumber(value?: string) {
   if (value) {
-    return parseInt(value, 10).toLocaleString();
+    return parseFloat(value).toLocaleString(undefined, {
+      minimumFractionDigits: 2
+    });
   }
 
   return value;
