@@ -21,4 +21,4 @@ yarn run start
 
 ## Deploy
 
-Push to GitHub. Netlify handles the rest. Changes to `development` deploy to the aptly named [development](https://development.funding.inreachventures.com) sub domain.
+Push to GitHub. Netlify handles the rest. Changes to `development` deploy to the aptly named [development](https://development.funding.inreachventures.com) sub domain. The development deployment points at the development API and database.
