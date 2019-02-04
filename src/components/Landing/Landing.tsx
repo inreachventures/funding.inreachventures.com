@@ -161,7 +161,7 @@ function GetStartedSummary({form}: GetStartedSummaryProps) {
     <Text style={styles.summary}>
       Answer our questions and produce an executive summary of{' '}
       {companyName(form)}. From this, we&rsquo;ll give you an investment
-      decision &mdash; and feedback &mdash; within seven days.
+      decision &mdash; and feedback &mdash; within 3 days.
     </Text>
   );
 }
