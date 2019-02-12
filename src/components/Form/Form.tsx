@@ -263,7 +263,7 @@ export default class Form extends React.Component<Props> {
 
               <View style={styles.loading}>
                 <View>
-                  <ActivityIndicator size={48} />
+                  <ActivityIndicator size={48} color="#52A23E" />
                 </View>
               </View>
             </View>

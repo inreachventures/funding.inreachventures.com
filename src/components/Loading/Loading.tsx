@@ -12,7 +12,7 @@ export default class Loading extends React.Component {
   render() {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size={48} />
+        <ActivityIndicator size={48} color="#52A23E" />
       </View>
     );
   }
