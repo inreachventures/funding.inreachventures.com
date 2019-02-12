@@ -125,7 +125,7 @@ type GetStartedButtonProps = {
 
 function GetStartedButton({form, history}: GetStartedButtonProps) {
   if (form.type === 'NotAsked' || form.type === 'Loading') {
-    return <ActivityIndicator size={24} />;
+    return <ActivityIndicator size={24} color="#52A23E" />;
   }
 
   return (
@@ -154,7 +154,7 @@ function GetStartedTitle({form}: GetStartedTitleProps) {
     return <Text style={styles.title}>Looking for investment?</Text>;
   }
 
-  return <ActivityIndicator size={32} />;
+  return <ActivityIndicator size={32} color="#52A23E" />;
 }
 
 type GetStartedSummaryProps = {
