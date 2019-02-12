@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
   },
   header: {
     flexShrink: 0,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: '80px',
+    padding: '12px'
   },
   headerLinks: {
     flex: 1,
@@ -38,10 +40,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerLink: {
-    ...theme.color.green,
-    marginHorizontal: 16,
-    fontSize: 18,
-    textAlign: 'center'
+    ...theme.color.primary,
+    ...theme.font.roboto,
+    fontSize: 16,
+    textAlign: 'center',
+    width: '140px'
   },
   content: {
     flex: 1
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   contentInner: {
-    maxWidth: 800,
+    maxWidth: 768,
     flexShrink: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -62,25 +65,27 @@ const styles = StyleSheet.create({
     shadowRadius: 32
   },
   logo: {
-    margin: 16,
-    borderRadius: 4
+    margin: 12
   },
   title: {
     ...theme.text.title,
-    ...theme.color.green,
-    fontSize: 48,
+    ...theme.color.primary,
+    ...theme.font.roboto,
+    fontSize: 42,
     textAlign: 'center',
-    margin: 8
+    marginBottom: 12
   },
   summary: {
-    ...theme.color.greenMuted,
-    margin: 16,
+    ...theme.color.greyOne,
+    ...theme.font.roboto,
     fontSize: 20,
+    lineHeight: 26,
+    fontWeight: 400,
     textAlign: 'center'
   },
   getStarted: {
-    width: 180,
-    margin: 16
+    width: 280,
+    marginTop: 48
   },
   terms: {
     ...theme.color.greenMuted,
@@ -181,12 +186,11 @@ export default class Landing extends React.Component<Props> {
             style={styles.headerLink}
             {...{
               accessibilityRole: 'link',
-              href: 'https://www.inreachventures.com',
-              target: '_blank'
+              href: 'https://www.inreachventures.com'
             }}
           >
             <Image
-              source={{width: 120, height: 60, uri: logo}}
+              source={{width: 144, height: 56, uri: logo}}
               resizeMode="contain"
               style={styles.logo}
             />
@@ -201,17 +205,47 @@ export default class Landing extends React.Component<Props> {
                 target: '_blank'
               }}
             >
-              Our Portfolio
+              Portfolio
             </Text>
             <Text
               style={styles.headerLink}
               {...{
                 accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com#about',
+                href: 'https://www.inreachventures.com#team',
                 target: '_blank'
               }}
             >
-              About Us
+              Team
+            </Text>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com#news',
+                target: '_blank'
+              }}
+            >
+              News
+            </Text>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com#blog',
+                target: '_blank'
+              }}
+            >
+              Blog
+            </Text>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://library.inreachventures.com/',
+                target: '_blank'
+              }}
+            >
+              Library
             </Text>
           </View>
         </SafeAreaView>

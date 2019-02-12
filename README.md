@@ -13,9 +13,21 @@ HOST=https://funding.inreachvenures.com
 API_HOST=https://api.funding.inreachvenures.com
 ```
 
+Make sure you are using the correct version of `nvm`:
+
+```
+nvm install
+```
+
+Update yarn:
+
+```
+yarn install
+```
+
 Start the server with yarn:
 
-```sh
+```
 yarn run start
 ```
 

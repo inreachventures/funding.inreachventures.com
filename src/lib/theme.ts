@@ -5,6 +5,10 @@ type Theme = {
     title: TextStyle;
     subtitle: TextStyle;
   };
+  font: {
+    roboto: TextStyle;
+    openSans: TextStyle;
+  };
   color: {
     [k: string]: {
       [k: string]: string;
@@ -13,6 +17,11 @@ type Theme = {
 };
 
 type Colors = {
+  primary: string;
+  secondary: string;
+  greyOne: string;
+  greyTwo: string;
+  greyThree: string;
   green: string;
   greenLight: string;
   greenLightMuted: string;
@@ -25,6 +34,11 @@ type Colors = {
 };
 
 export const colors: Colors = {
+  primary: '#52A23E',
+  secondary: '#428232',
+  greyOne: '#939598',
+  greyTwo: '#E5E5E5',
+  greyThree: '#F8F8F8',
   green: 'hsl(108,40%,47%)',
   greenLight: 'hsl(108,65%,50%)',
   greenLightMuted: 'hsl(108,5%,90%)',
@@ -47,7 +61,25 @@ const theme: Theme = {
       fontWeight: '500'
     }
   },
+  font: {
+    roboto: {
+      fontFamily: 'Roboto, sans-serif',
+      fontWeight: '400'
+    },
+    openSans: {
+      fontFamily: 'Open Sans, sans-serif'
+    }
+  },
   color: {
+    primary: {
+      color: colors.primary
+    },
+    secondary: {
+      color: colors.secondary
+    },
+    greyOne: {
+      color: colors.greyOne
+    },
     green: {
       color: colors.green
     },
