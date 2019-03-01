@@ -138,7 +138,7 @@ export default class Auth extends React.Component<Props> {
       <View style={[styles.container]}>
         <Navigation>
           <View style={navStyles.view}>
-            {/*<Text style={navStyles.text}>Sign in</Text>*/}
+            <Text style={navStyles.text}>Sign in</Text>
           </View>
         </Navigation>
 
@@ -150,7 +150,7 @@ export default class Auth extends React.Component<Props> {
             <View style={headerStyles.view}>
               <Text style={headerStyles.text}>Sign in with email</Text>
             </View>
-            {/*<View style={headerStyles.view}>
+            <View style={headerStyles.view}>
               <Text style={headerStyles.text}>How shall we proceed?</Text>
             </View>
 
@@ -180,7 +180,7 @@ export default class Auth extends React.Component<Props> {
               <View style={dividerStyles.line} />
               <Text style={dividerStyles.text}>OR</Text>
               <View style={dividerStyles.line} />
-            </View>*/}
+            </View>
 
             <View style={styles.authOption}>
               <Text
