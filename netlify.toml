@@ -30,9 +30,21 @@
   status = 302
 
 [[redirects]]
+  from = "/auth"
+  to = "https://api.funding.inreachventures.com/auth?token=:token"
+  query = {redirect = "https://funding.inreachventures.com", token = ":token"}
+  status = 302
+
+[[redirects]]
   from = "/in"
   to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=:redirect"
   query = {redirect = ":redirect", token = ":token"}
+  status = 302
+
+[[redirects]]
+  from = "/in"
+  to = "https://api.funding.inreachventures.com/auth?token=:token"
+  query = {redirect = "https://funding.inreachventures.com", token = ":token"}
   status = 302
 
 [[redirects]]
