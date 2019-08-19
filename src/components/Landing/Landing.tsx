@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     flexDirection: 'row',
     height: '80px',
-    padding: '12px'
+    padding: '12px',
+    backgroundColor: 'rgb(248,248,248)'
   },
   logo: {
     margin: 22
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexDirection: 'column',
-    minHeight: 350
+    minHeight: 350,
+    backgroundColor: 'rgb(248,248,248)'
   },
   title: {
     ...theme.text.title,
@@ -73,6 +75,26 @@ const styles = StyleSheet.create({
     maxWidth: 720,
     marginLeft: 60
   },
+  contentReview: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 48,
+    marginBottom: 48,
+    maxWidth: 720,
+    backgroundColor: 'rgb(248,248,248)',
+    minHeight: 200,
+    paddingRight: 20,
+    paddingBottom: 40
+  },
+  contentReviewText: {
+    flex: 5
+  },
+  contentReviewImage: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   textCopy: {
     ...theme.color.greyOne,
     fontSize: 16,
@@ -86,25 +108,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginTop: 42
   },
-  contentReview: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 48,
-    marginBottom: 48,
-    maxWidth: 720
-  },
-  contentReviewText: {
-    flex: 5
-  },
-  contentReviewImage: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  reviewImage: {
-    margin: 20
-  },
   textReview: {
     ...theme.color.greyOne,
     fontSize: 16,
@@ -112,8 +115,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontStyle: 'italic'
   },
-  contentCopyBoxCTA: {},
-  textCopyBlock: {},
   terms: {
     ...theme.color.greenMuted,
     fontSize: 12,
@@ -214,13 +215,9 @@ export default class Landing extends React.Component<Props> {
         // source={{uri: map}}
         style={styles.main}
       >
-        <ScrollView
-          style={styles.content}
-          contentContainerStyle={styles.contentContainer}
-        >
+        <ScrollView style={styles.content}>
           <SafeAreaView style={styles.header}>
             <Text
-              style={styles.headerLink}
               {...{
                 accessibilityRole: 'link',
                 href: 'https://www.inreachventures.com'
@@ -298,13 +295,13 @@ export default class Landing extends React.Component<Props> {
               </SafeAreaView>
               <SafeAreaView style={styles.contentReviewText}>
                 <Text style={styles.textTitle}>
-                  Aaron Joyce, Co-Founder Traitly (Financial Times)
+                  Aaron Joyce, Co-Founder Traitly
                 </Text>
 
                 <Text style={styles.textReview}>
-                  We had started approaching a few local investors for funding,
-                  but we were not having much luck getting through, just talking
-                  to the junior guys. Then InReach emailed us.
+                  « We had started approaching a few local investors for
+                  funding, but we were not having much luck getting through,
+                  just talking to the junior guys. Then InReach emailed us.
                 </Text>
                 <Text style={styles.textReview}>
                   I was suspicious at the beginning, here was this partner
@@ -313,7 +310,18 @@ export default class Landing extends React.Component<Props> {
                   meritocratic way of investing.
                 </Text>
                 <Text style={styles.textReview}>
-                  It’s not who you know or where you went to school.
+                  It’s not who you know or where you went to school. »
+                </Text>
+                <Text style={styles.textReview}>
+                  <a
+                    style={{color: 'green', textDecoration: 'none'}}
+                    href={
+                      'https://www.ft.com/content/dd7fa798-bfcd-11e7-823b-ed31693349d3'
+                    }
+                    target={'_blank'}
+                  >
+                    Read the full article on the Financial Times
+                  </a>
                 </Text>
               </SafeAreaView>
             </SafeAreaView>
@@ -385,13 +393,11 @@ export default class Landing extends React.Component<Props> {
                 All the data which we collect through the process is kept
                 in-house solely to assist our qualification process. This data
                 is not shared with any third parties or people outside of the
-                InReach Ventures team or our trusted partners. Please see our
-                data privacy notice
-                (https://www.inreachventures.com/legal/inreach-data-privacy-notice/)
-                for further details.
+                InReach Ventures team or our trusted partners.
               </Text>
             </SafeAreaView>
           </SafeAreaView>
+          <Terms />
         </ScrollView>
         <Terms />
         <IntercomMessenger />
