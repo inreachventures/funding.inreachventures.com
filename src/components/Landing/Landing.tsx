@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   Button,
   Image,
-  ImageBackground,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -34,60 +33,87 @@ const styles = StyleSheet.create({
     height: '80px',
     padding: '12px'
   },
-  headerLinks: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  headerLink: {
-    ...theme.color.primary,
-    ...theme.font.roboto,
-    fontSize: 16,
-    textAlign: 'center',
-    width: '140px'
+  logo: {
+    margin: 22
   },
   content: {
     flex: 1
   },
-  contentContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  contentInner: {
-    maxWidth: 768,
-    flexShrink: 1,
-    justifyContent: 'center',
+  contentHeader: {
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    borderRadius: 16,
-    shadowColor: 'white',
-    shadowRadius: 32
-  },
-  logo: {
-    margin: 12
+    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    minHeight: 350
   },
   title: {
     ...theme.text.title,
     ...theme.color.primary,
     ...theme.font.roboto,
-    fontSize: 42,
+    fontSize: 38,
     textAlign: 'center',
     marginBottom: 12
+  },
+  getStarted: {
+    width: 220
   },
   summary: {
     ...theme.color.greyOne,
     ...theme.font.roboto,
-    fontSize: 20,
-    lineHeight: 26,
+    fontSize: 12,
+    lineHeight: 18,
     fontWeight: 400,
-    textAlign: 'center'
+    textAlign: 'center',
+    maxWidth: 520
   },
-  getStarted: {
-    width: 280,
-    marginTop: 48
+  contentCopy: {
+    alignItems: 'center',
+    marginBottom: 58
   },
+  contentCopyText: {
+    maxWidth: 720,
+    marginLeft: 60
+  },
+  textCopy: {
+    ...theme.color.greyOne,
+    fontSize: 16,
+    lineHeight: 20,
+    marginTop: 10
+  },
+  textTitle: {
+    ...theme.color.greyOne,
+    fontSize: 18,
+    fontWeight: 500,
+    marginBottom: 12,
+    marginTop: 42
+  },
+  contentReview: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 48,
+    marginBottom: 48,
+    maxWidth: 720
+  },
+  contentReviewText: {
+    flex: 5
+  },
+  contentReviewImage: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  reviewImage: {
+    margin: 20
+  },
+  textReview: {
+    ...theme.color.greyOne,
+    fontSize: 16,
+    lineHeight: 20,
+    marginTop: 10,
+    fontStyle: 'italic'
+  },
+  contentCopyBoxCTA: {},
+  textCopyBlock: {},
   terms: {
     ...theme.color.greenMuted,
     fontSize: 12,
@@ -135,7 +161,7 @@ function GetStartedButton({form, history}: GetStartedButtonProps) {
         onPress={() => {
           history.push(form.type === 'Success' ? '/form' : '/auth');
         }}
-        title="get started"
+        title="engage with us"
         color={colors.green}
       />
     </View>
@@ -148,11 +174,17 @@ type GetStartedTitleProps = {
 
 function GetStartedTitle({form}: GetStartedTitleProps) {
   if (form.type === 'Success') {
-    return <Text style={styles.title}>Tell us about {companyName(form)}</Text>;
+    return <Text style={styles.title}>Pitch {companyName(form)}</Text>;
   }
 
   if (form.type === 'Failure') {
-    return <Text style={styles.title}>Looking for investment?</Text>;
+    return (
+      <Text style={styles.title}>
+        Pitch Your Startup
+        <br />
+        Get An Investment Decision 3 Days Later
+      </Text>
+    );
   }
 
   return <ActivityIndicator size={32} color="#52A23E" />;
@@ -165,9 +197,10 @@ type GetStartedSummaryProps = {
 function GetStartedSummary({form}: GetStartedSummaryProps) {
   return (
     <Text style={styles.summary}>
-      Answer our questions and produce an executive summary of{' '}
-      {companyName(form)}. From this, we&rsquo;ll give you an investment
-      decision &mdash; and feedback &mdash; within 3 days.
+      Complete an executive summary of {companyName(form)} and we&rsquo;ll give
+      you an investment decision &mdash; and feedback &mdash; within 3 days. All
+      the data which we collect through the process is kept in-house solely to
+      assist our qualification process.
     </Text>
   );
 }
@@ -177,101 +210,192 @@ type Props = RouteComponentProps<{}>;
 export default class Landing extends React.Component<Props> {
   render() {
     return (
-      <ImageBackground
-        source={{uri: map}}
+      <SafeAreaView
+        // source={{uri: map}}
         style={styles.main}
-        resizeMode="cover"
       >
-        <SafeAreaView style={styles.header}>
-          <Text
-            style={styles.headerLink}
-            {...{
-              accessibilityRole: 'link',
-              href: 'https://www.inreachventures.com'
-            }}
-          >
-            <Image
-              source={{width: 144, height: 56, uri: logo}}
-              resizeMode="contain"
-              style={styles.logo}
-            />
-          </Text>
-
-          <View style={styles.headerLinks}>
-            <Text
-              style={styles.headerLink}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com#portfolio',
-                target: '_blank'
-              }}
-            >
-              Portfolio
-            </Text>
-            <Text
-              style={styles.headerLink}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com#team',
-                target: '_blank'
-              }}
-            >
-              Team
-            </Text>
-            <Text
-              style={styles.headerLink}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com#news',
-                target: '_blank'
-              }}
-            >
-              News
-            </Text>
-            <Text
-              style={styles.headerLink}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com#blog',
-                target: '_blank'
-              }}
-            >
-              Blog
-            </Text>
-            <Text
-              style={styles.headerLink}
-              {...{
-                accessibilityRole: 'link',
-                href: 'https://library.inreachventures.com/',
-                target: '_blank'
-              }}
-            >
-              Library
-            </Text>
-          </View>
-        </SafeAreaView>
-
         <ScrollView
           style={styles.content}
           contentContainerStyle={styles.contentContainer}
         >
-          <SafeAreaView style={styles.contentInner}>
+          <SafeAreaView style={styles.header}>
+            <Text
+              style={styles.headerLink}
+              {...{
+                accessibilityRole: 'link',
+                href: 'https://www.inreachventures.com'
+              }}
+            >
+              <Image
+                source={{width: 144, height: 56, uri: logo}}
+                resizeMode="contain"
+                style={styles.logo}
+              />
+            </Text>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.contentHeader}>
             <FormConsumer>
               {(f) => (
                 <React.Fragment>
                   <GetStartedTitle form={f} />
-
-                  <GetStartedSummary form={f} />
-
                   <GetStartedButton form={f} history={this.props.history} />
+                  <GetStartedSummary form={f} />
                 </React.Fragment>
               )}
             </FormConsumer>
           </SafeAreaView>
+
+          <SafeAreaView style={styles.contentCopy}>
+            <SafeAreaView style={styles.contentCopyText}>
+              <Text style={styles.textTitle}>
+                The best way to engage with a partner at InReach Ventures
+              </Text>
+              <Text style={styles.textCopy}>
+                Over the years, we have come to realize how difficult it can be
+                for entrepreneurs to pitch their startups to investors. The
+                process with traditional VCs firms can be long and opaque.
+              </Text>
+              <Text style={styles.textCopy}>
+                The funding form is the easiest and fastest way to engage with
+                us - InReach Ventures - and help assess how we could work
+                together.
+              </Text>
+              <Text style={styles.textCopy}>
+                At the very least we will give you precise and honest feedback
+                on your startup within the next few days.
+              </Text>
+              <Text style={styles.textTitle}>
+                Even if you are not fundraising at the moment
+              </Text>
+              <Text style={styles.textCopy}>
+                The structure and questions of the funding form follow the exact
+                format VCs use to review your startup before taking a meeting.
+              </Text>
+              <Text style={styles.textCopy}>
+                They funding form will help you understand your business better
+                including the most important information investors are looking
+                for.
+              </Text>
+              <Text style={styles.textCopy}>
+                Even if you are not actively fundraising, we use the funding
+                form as a way to understand your business and give you precise
+                guidance and support.
+              </Text>
+              <Text style={styles.textCopy}>
+                It also allows us to establish contact and facilitate future
+                interactions.
+              </Text>
+            </SafeAreaView>
+
+            <SafeAreaView style={styles.contentReview}>
+              <SafeAreaView style={styles.contentReviewImage}>
+                <Image
+                  resizeMode="contain"
+                  style={styles.reviewImage}
+                  source={{width: 150, height: 150, uri: aaron}}
+                />
+              </SafeAreaView>
+              <SafeAreaView style={styles.contentReviewText}>
+                <Text style={styles.textTitle}>
+                  Aaron Joyce, Co-Founder Traitly (Financial Times)
+                </Text>
+
+                <Text style={styles.textReview}>
+                  We had started approaching a few local investors for funding,
+                  but we were not having much luck getting through, just talking
+                  to the junior guys. Then InReach emailed us.
+                </Text>
+                <Text style={styles.textReview}>
+                  I was suspicious at the beginning, here was this partner
+                  contacting me. I would never have thought we had a chance of
+                  raising money with someone of his calibre. It is a much more
+                  meritocratic way of investing.
+                </Text>
+                <Text style={styles.textReview}>
+                  It’s not who you know or where you went to school.
+                </Text>
+              </SafeAreaView>
+            </SafeAreaView>
+
+            <FormConsumer>
+              {(f) => (
+                <React.Fragment>
+                  <GetStartedButton form={f} history={this.props.history} />
+                </React.Fragment>
+              )}
+            </FormConsumer>
+
+            <SafeAreaView style={styles.contentCopyText}>
+              <Text style={styles.textTitle}>Frequently Asked Questions</Text>
+
+              <Text style={styles.textCopy}>Who are InReach Ventures?</Text>
+              <Text style={styles.textCopy}>
+                We are a venture capital firm based in London, focused on
+                investing in early stage startups across Europe. Our mission is
+                to uncover and fund game-changing technology and use our AI
+                powered software to discover early stage tech companies earlier
+                and faster.
+              </Text>
+              <br />
+
+              <Text style={styles.textCopy}>
+                What is different about InReach Ventures?
+              </Text>
+              <Text style={styles.textCopy}>
+                We are revolutionising the traditional venture capital approach
+                by using software and machine learning algorithms to identify
+                the most promising investment opportunities emanating from
+                across Europe. We know entrepreneurs are very busy running their
+                day-to-day business and therefore we proactively reach out to
+                entrepreneurs to assess potential investment opportunities in an
+                efficient manner.
+              </Text>
+              <br />
+
+              <Text style={styles.textCopy}>
+                How long does our investment process take from start to finish?
+              </Text>
+              <Text style={styles.textCopy}>
+                We try to be as efficient as possible with our process, as we
+                don’t want to waste any entrepreneur’s time, allowing them to
+                focus on growing their business. When we like an investment
+                opportunity, it can take as little as a week to issue a term
+                sheet. From then, the legal process to closing/funding typically
+                takes 3-4 weeks.
+              </Text>
+              <br />
+
+              <Text style={styles.textCopy}>
+                Why answer the questions in the online funding form?
+              </Text>
+              <Text style={styles.textCopy}>
+                The funding form enables us to quickly assess a potential fit
+                with a startup and offers more precise feedback on what the next
+                steps should be. Even if you are not actively fundraising, we
+                use the funding form as a way to understand some basic
+                information about your startup and give the founders guidance
+                and support. It also allows us to establish contact and
+                facilitate future interactions.
+              </Text>
+              <br />
+
+              <Text style={styles.textCopy}>How do you deal with data?</Text>
+              <Text style={styles.textCopy}>
+                All the data which we collect through the process is kept
+                in-house solely to assist our qualification process. This data
+                is not shared with any third parties or people outside of the
+                InReach Ventures team or our trusted partners. Please see our
+                data privacy notice
+                (https://www.inreachventures.com/legal/inreach-data-privacy-notice/)
+                for further details.
+              </Text>
+            </SafeAreaView>
+          </SafeAreaView>
         </ScrollView>
         <Terms />
         <IntercomMessenger />
-      </ImageBackground>
+      </SafeAreaView>
     );
   }
 }
