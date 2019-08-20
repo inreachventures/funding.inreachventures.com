@@ -175,13 +175,17 @@ type GetStartedTitleProps = {
 
 function GetStartedTitle({form}: GetStartedTitleProps) {
   if (form.type === 'Success') {
-    return <Text style={styles.title}>Pitch {companyName(form)}</Text>;
+    return (
+      <Text style={styles.title}>
+        Build {companyName(form)} Executive Summary
+      </Text>
+    );
   }
 
   if (form.type === 'Failure') {
     return (
       <Text style={styles.title}>
-        Pitch Your Startup
+        Build Your Executive Summary
         <br />
         Get An Investment Decision 3 Days Later
       </Text>
@@ -220,7 +224,8 @@ export default class Landing extends React.Component<Props> {
             <Text
               {...{
                 accessibilityRole: 'link',
-                href: 'https://www.inreachventures.com'
+                href: 'https://www.inreachventures.com',
+                target: '__blank'
               }}
             >
               <Image
@@ -254,9 +259,9 @@ export default class Landing extends React.Component<Props> {
                 process with traditional VCs firms can be long and opaque.
               </Text>
               <Text style={styles.textCopy}>
-                The funding form is the easiest and fastest way to engage with
-                us - InReach Ventures - and help assess how we could work
-                together.
+                The funding questionnaire is the easiest and fastest way to
+                engage with us - InReach Ventures - and help assess how we could
+                work together.
               </Text>
               <Text style={styles.textCopy}>
                 At the very least we will give you precise and honest feedback
@@ -266,22 +271,23 @@ export default class Landing extends React.Component<Props> {
                 Even if you are not fundraising at the moment
               </Text>
               <Text style={styles.textCopy}>
-                The structure and questions of the funding form follow the exact
-                format VCs use to review your startup before taking a meeting.
+                The structure and questions of the funding questionnaire follow
+                the exact format VCs use to review your startup, before ever
+                having a meeting.
               </Text>
               <Text style={styles.textCopy}>
-                They funding form will help you understand your business better
-                including the most important information investors are looking
-                for.
+                The funding questionnaire will help you better understand your
+                business, including the most important information investors are
+                looking for.
               </Text>
               <Text style={styles.textCopy}>
                 Even if you are not actively fundraising, we use the funding
-                form as a way to understand your business and give you precise
+                questionnaire to understand your business and give you precise
                 guidance and support.
               </Text>
               <Text style={styles.textCopy}>
-                It also allows us to establish contact and facilitate future
-                interactions.
+                This is about building a relationship for when the time is
+                right.
               </Text>
             </SafeAreaView>
 
@@ -289,13 +295,12 @@ export default class Landing extends React.Component<Props> {
               <SafeAreaView style={styles.contentReviewImage}>
                 <Image
                   resizeMode="contain"
-                  style={styles.reviewImage}
                   source={{width: 150, height: 150, uri: aaron}}
                 />
               </SafeAreaView>
               <SafeAreaView style={styles.contentReviewText}>
                 <Text style={styles.textTitle}>
-                  Aaron Joyce, Co-Founder Traitly
+                  Aaron Joyce, Co-Founder of Traitly
                 </Text>
 
                 <Text style={styles.textReview}>
