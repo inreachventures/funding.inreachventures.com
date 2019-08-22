@@ -63,11 +63,11 @@
   [headers.values]
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     X-Frame-Options = "DENY"
-    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com widget.intercom.io; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; connect-src https://*.funding.inreachventures.com https://sentry.io https://widget.intercom.io;"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com https://*.intercom.io https://*.intercomcdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com https://*.intercomcdn.com https://*.intercomassets.com https://*.intercomusercontent.com https://*.intercom.io https://*.intercom-attachments.com; connect-src https://*.funding.inreachventures.com https://sentry.io https://*.intercom.io wss://*.intercom.io https://*.intercomcdn.com https://*.intercomusercontent.com;"
 
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com widget.intercom.io; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; connect-src https://*.funding.inreachventures.com https://sentry.io https://widget.intercom.io;"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com https://*.intercom.io https://*.intercomcdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com https://*.intercomcdn.com https://*.intercomassets.com https://*.intercomusercontent.com https://*.intercom.io https://*.intercom-attachments.com; connect-src https://*.funding.inreachventures.com https://sentry.io https://*.intercom.io wss://*.intercom.io https://*.intercomcdn.com https://*.intercomusercontent.com;"
     Referrer-Policy = "strict-origin"
