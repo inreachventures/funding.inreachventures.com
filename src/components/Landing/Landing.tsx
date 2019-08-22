@@ -127,23 +127,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const companyName = compose(
-  ifElse(isEmpty, always('your company'), identity),
-  trim,
-  pathOr('', [
-    'data',
-    'sections',
-    0,
-    'questions',
-    0,
-    'fields',
-    0,
-    'fields',
-    0,
-    'value'
-  ])
-);
-
 type RemoteForm = RemoteData<string, Form>;
 
 type GetStartedButtonProps = {
@@ -166,47 +149,6 @@ function GetStartedButton({form, history}: GetStartedButtonProps) {
         color={colors.green}
       />
     </View>
-  );
-}
-
-type GetStartedTitleProps = {
-  form: RemoteForm;
-};
-
-function GetStartedTitle({form}: GetStartedTitleProps) {
-  if (form.type === 'Success') {
-    return (
-      <Text style={styles.title}>
-        Build {companyName(form)} Executive Summary
-      </Text>
-    );
-  }
-
-  if (form.type === 'Failure') {
-    return (
-      <Text style={styles.title}>
-        Build Your Executive Summary
-        <br />
-        Get An Investment Decision 3 Days Later
-      </Text>
-    );
-  }
-
-  return <ActivityIndicator size={32} color="#52A23E" />;
-}
-
-type GetStartedSummaryProps = {
-  form: RemoteForm;
-};
-
-function GetStartedSummary({form}: GetStartedSummaryProps) {
-  return (
-    <Text style={styles.summary}>
-      Complete an executive summary of {companyName(form)} and we&rsquo;ll give
-      you an investment decision &mdash; and feedback &mdash; within 3 days. All
-      the data which we collect through the process is kept in-house solely to
-      assist our qualification process.
-    </Text>
   );
 }
 
@@ -237,15 +179,25 @@ export default class Landing extends React.Component<Props> {
           </SafeAreaView>
 
           <SafeAreaView style={styles.contentHeader}>
+            <Text style={styles.title}>
+              Build Your Executive Summary
+              <br />
+              Get An Investment Decision 3 Days Later
+            </Text>
             <FormConsumer>
               {(f) => (
                 <React.Fragment>
-                  <GetStartedTitle form={f} />
                   <GetStartedButton form={f} history={this.props.history} />
-                  <GetStartedSummary form={f} />
                 </React.Fragment>
               )}
             </FormConsumer>
+            <Text style={styles.summary}>
+              Complete an executive summary of your company and we’ll give you
+              an investment decision — and feedback — within 3 days. We will
+              send you a copy of your answers upon completion of the
+              questionnaire. All the data which we collect through the process
+              is kept in-house solely to assist our qualification process.
+            </Text>
           </SafeAreaView>
 
           <SafeAreaView style={styles.contentCopy}>
@@ -380,16 +332,16 @@ export default class Landing extends React.Component<Props> {
               <br />
 
               <Text style={styles.textCopy}>
-                Why answer the questions in the online funding form?
+                Why answer the questions in the online funding questionnaire?
               </Text>
               <Text style={styles.textCopy}>
-                The funding form enables us to quickly assess a potential fit
-                with a startup and offers more precise feedback on what the next
-                steps should be. Even if you are not actively fundraising, we
-                use the funding form as a way to understand some basic
-                information about your startup and give the founders guidance
-                and support. It also allows us to establish contact and
-                facilitate future interactions.
+                The funding questionnaire enables us to quickly assess a
+                potential fit with a startup and offers more precise feedback on
+                what the next steps should be. Even if you are not actively
+                fundraising, we use the funding questionnaire as a way to
+                understand some basic information about your startup and give
+                the founders guidance and support. It also allows us to
+                establish contact and facilitate future interactions.
               </Text>
               <br />
 

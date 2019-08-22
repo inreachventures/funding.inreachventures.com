@@ -1,5 +1,11 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
@@ -16,6 +22,9 @@ const liqs = new URLSearchParams({redirect: `${host}/form`} as any);
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  bg: {
+    opacity: 0.1
   },
   auth: {
     paddingVertical: 32,
@@ -40,6 +49,7 @@ const styles = StyleSheet.create({
     marginVertical: 8
   },
   authOptionText: {
+    fontSize: 16,
     marginVertical: 4,
     marginHorizontal: 12
   },
@@ -58,7 +68,7 @@ const navStyles = StyleSheet.create({
 
 const dividerStyles = StyleSheet.create({
   view: {
-    margin: 8,
+    margin: 12,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -80,6 +90,7 @@ const headerStyles = StyleSheet.create({
     padding: 12
   },
   text: {
+    margin: 8,
     textAlign: 'center',
     fontSize: 22,
     fontWeight: 'bold'
@@ -90,7 +101,7 @@ const authLinkStyles = StyleSheet.create({
   view: {
     display: 'flex',
     padding: 12,
-    margin: 4,
+    margin: 10,
     borderRadius: 4,
     flexDirection: 'row'
   },
@@ -135,7 +146,7 @@ export default class Auth extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[styles.container]}>
+      <View style={styles.container}>
         <Navigation>
           <View style={navStyles.view}>
             <Text style={navStyles.text}>Sign in</Text>
@@ -148,11 +159,25 @@ export default class Auth extends React.Component<Props> {
         >
           <View style={styles.authContent}>
             <View style={headerStyles.view}>
-              <Text style={headerStyles.text}>Sign in with email</Text>
+              <Text style={headerStyles.text}>Welcome</Text>
             </View>
-            <View style={headerStyles.view}>
-              <Text style={headerStyles.text}>How shall we proceed?</Text>
-            </View>
+
+            <Text style={styles.authOptionText}>
+              By sign-in, you will be able to save your funding questionnaire
+              and we will send you by email a copy of your answers.
+            </Text>
+
+            <Text style={styles.authOptionText}>
+              Once you complete the questionnaire, you will receive an
+              investment decision from our investment partner in the next 3
+              days.
+            </Text>
+
+            <Text style={styles.authOptionText}>
+              Get started faster by using your LinkedIn account. If this is your
+              first time signing in, we will pre-fill some information &mdash;
+              such as your name &mdash; to save you time.
+            </Text>
 
             <View style={styles.authOption}>
               <View
@@ -168,12 +193,6 @@ export default class Auth extends React.Component<Props> {
 
                 <Text style={[authLinkStyles.text]}>LinkedIn</Text>
               </View>
-
-              <Text style={styles.authOptionText}>
-                Get started faster by using your LinkedIn account. If this is
-                your first time signing in, we will pre-fill some information
-                &mdash; such as your name &mdash; to save you time.
-              </Text>
             </View>
 
             <View style={dividerStyles.view}>
@@ -182,6 +201,10 @@ export default class Auth extends React.Component<Props> {
               <View style={dividerStyles.line} />
             </View>
 
+            <Text style={styles.authOptionText}>
+              We will send you a link that takes you straight into your funding
+              questionnaire.
+            </Text>
             <View style={styles.authOption}>
               <Text
                 onPress={this.handleEmailPress}
@@ -192,11 +215,6 @@ export default class Auth extends React.Component<Props> {
                 </Text>
 
                 <Text style={[authLinkStyles.text]}>Email</Text>
-              </Text>
-
-              <Text style={styles.authOptionText}>
-                We will send you a link that takes you straight into your
-                funding form.
               </Text>
             </View>
           </View>
