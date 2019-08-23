@@ -22,6 +22,7 @@ import {Form} from '../../lib/form';
 import {RemoteData} from '../../lib/remoteData';
 import logo from '../../images/logo.png';
 import map from '../../images/map.png';
+import {IntercomMessenger} from '../IntercomMessenger';
 
 const styles = StyleSheet.create({
   main: {
@@ -269,6 +270,7 @@ export default class Landing extends React.Component<Props> {
           </SafeAreaView>
         </ScrollView>
         <Terms />
+        <IntercomMessenger />
       </ImageBackground>
     );
   }
