@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
@@ -165,12 +159,6 @@ export default class Auth extends React.Component<Props> {
             <Text style={styles.authOptionText}>
               By sign-in, you will be able to save your funding questionnaire
               and we will send you by email a copy of your answers.
-            </Text>
-
-            <Text style={styles.authOptionText}>
-              Once you complete the questionnaire, you will receive an
-              investment decision from our investment partner in the next 3
-              days.
             </Text>
 
             <Text style={styles.authOptionText}>

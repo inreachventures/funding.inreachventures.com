@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import {RouteComponentProps} from 'react-router';
 import {History} from 'history';
-import {ifElse, compose, pathOr, trim, always, identity, isEmpty} from 'ramda';
 
 import {FormConsumer} from '../FormContext';
 import Terms from '../Terms';
@@ -20,7 +19,7 @@ import theme, {colors} from '../../lib/theme';
 import {Form} from '../../lib/form';
 import {RemoteData} from '../../lib/remoteData';
 import logo from '../../images/logo.png';
-import map from '../../images/map.png';
+import aaron from '../../images/aaron.png';
 import {IntercomMessenger} from '../IntercomMessenger';
 
 const styles = StyleSheet.create({
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(248,248,248)'
   },
   logo: {
-    margin: 22
+    margin: 20
   },
   content: {
     flex: 1
@@ -53,10 +52,12 @@ const styles = StyleSheet.create({
     ...theme.font.roboto,
     fontSize: 38,
     textAlign: 'center',
-    marginBottom: 12
+    marginBottom: 12,
+    paddingTop: 50
   },
   getStarted: {
-    width: 220
+    width: 240,
+    padding: 20
   },
   summary: {
     ...theme.color.greyOne,
@@ -65,15 +66,17 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     fontWeight: 400,
     textAlign: 'center',
-    maxWidth: 520
+    maxWidth: 520,
+    paddingBottom: 50
   },
   contentCopy: {
     alignItems: 'center',
-    marginBottom: 58
+    marginBottom: 28
   },
   contentCopyText: {
     maxWidth: 720,
-    marginLeft: 60
+    marginLeft: 60,
+    marginRight: 20
   },
   contentReview: {
     flexDirection: 'row',
@@ -85,13 +88,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(248,248,248)',
     minHeight: 200,
     paddingRight: 20,
-    paddingBottom: 40
+    paddingBottom: 20
   },
   contentReviewText: {
-    flex: 5
+    flex: 3,
+    marginBottom: 20
   },
   contentReviewImage: {
-    flex: 2,
+    flex: 1,
+    minWidth: 150,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -192,11 +197,10 @@ export default class Landing extends React.Component<Props> {
               )}
             </FormConsumer>
             <Text style={styles.summary}>
-              Complete an executive summary of your company and we’ll give you
-              an investment decision — and feedback — within 3 days. We will
-              send you a copy of your answers upon completion of the
+              We will send you a copy of your answers upon completion of the
               questionnaire. All the data which we collect through the process
-              is kept in-house solely to assist our qualification process.
+              is reviewed by a partner and kept in-house solely to assist our
+              qualification process.
             </Text>
           </SafeAreaView>
 
@@ -322,8 +326,10 @@ export default class Landing extends React.Component<Props> {
                 How long does our investment process take from start to finish?
               </Text>
               <Text style={styles.textCopy}>
-                We try to be as efficient as possible with our process, as we
-                don’t want to waste any entrepreneur’s time, allowing them to
+                Once you complete the questionnaire, you will receive an
+                investment decision from our investment partner in the next 3
+                days. We try to be as efficient as possible with our process, as
+                we don’t want to waste any entrepreneur’s time, allowing them to
                 focus on growing their business. When we like an investment
                 opportunity, it can take as little as a week to issue a term
                 sheet. From then, the legal process to closing/funding typically
@@ -347,16 +353,26 @@ export default class Landing extends React.Component<Props> {
 
               <Text style={styles.textCopy}>How do you deal with data?</Text>
               <Text style={styles.textCopy}>
-                All the data which we collect through the process is kept
-                in-house solely to assist our qualification process. This data
-                is not shared with any third parties or people outside of the
-                InReach Ventures team or our trusted partners.
+                We will send you a copy of your answers upon completion of the
+                questionnaire. All the data which we collect through the process
+                is reviewed by a partner and kept in-house solely to assist our
+                qualification process. This data is not shared with any third
+                parties or people outside of the InReach Ventures team or our
+                trusted partners. Please see our{' '}
+                <a
+                  href={
+                    'https://www.inreachventures.com/legal/inreach-data-privacy-notice/'
+                  }
+                  target={'_blank'}
+                >
+                  data privacy notice
+                </a>{' '}
+                for further details.
               </Text>
             </SafeAreaView>
           </SafeAreaView>
           <Terms />
         </ScrollView>
-        <Terms />
         <IntercomMessenger />
       </SafeAreaView>
     );
