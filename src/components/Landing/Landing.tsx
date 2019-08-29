@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   terms: {
     ...theme.color.greenMuted,
     fontSize: 12,
-    margin: 8,
+    margin: 20,
     textAlign: 'center'
   },
   link: {
