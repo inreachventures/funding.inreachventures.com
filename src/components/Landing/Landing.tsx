@@ -106,10 +106,17 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginTop: 10
   },
+  textFAQ: {
+    ...theme.color.greyOne,
+    fontSize: 16,
+    lineHeight: 20,
+    marginTop: 10,
+    fontWeight: 500
+  },
   textTitle: {
     ...theme.color.greyOne,
     fontSize: 18,
-    fontWeight: 500,
+    fontWeight: 650,
     marginBottom: 12,
     marginTop: 42
   },
@@ -150,8 +157,8 @@ function GetStartedButton({form, history}: GetStartedButtonProps) {
         onPress={() => {
           history.push(form.type === 'Success' ? '/form' : '/auth');
         }}
-        title="engage with us"
-        color={colors.green}
+        title="get started"
+        color={'#0068A4'}
       />
     </View>
   );
@@ -185,9 +192,9 @@ export default class Landing extends React.Component<Props> {
 
           <SafeAreaView style={styles.contentHeader}>
             <Text style={styles.title}>
-              Build Your Executive Summary
+              Engage with a partner
               <br />
-              Get An Investment Decision 3 Days Later
+              Get an answer in the next 3 days
             </Text>
             <FormConsumer>
               {(f) => (
@@ -197,17 +204,16 @@ export default class Landing extends React.Component<Props> {
               )}
             </FormConsumer>
             <Text style={styles.summary}>
-              We will send you a copy of your answers upon completion of the
-              questionnaire. All the data which we collect through the process
-              is reviewed by a partner and kept in-house solely to assist our
-              qualification process.
+              All the data which we collect through the process will be reviewed
+              by a partner, treated as confidential, and kept in-house solely to
+              assist our qualification process.
             </Text>
           </SafeAreaView>
 
           <SafeAreaView style={styles.contentCopy}>
             <SafeAreaView style={styles.contentCopyText}>
               <Text style={styles.textTitle}>
-                The best way to engage with a partner at InReach Ventures
+                The best way to engage with a partner
               </Text>
               <Text style={styles.textCopy}>
                 Over the years, we have come to realize how difficult it can be
@@ -220,8 +226,11 @@ export default class Landing extends React.Component<Props> {
                 work together.
               </Text>
               <Text style={styles.textCopy}>
-                At the very least we will give you precise and honest feedback
-                on your startup within the next few days.
+                We try to be as efficient as possible with our process, as we
+                don’t want to waste any entrepreneur’s time, allowing them to
+                focus on growing their business. When we like an investment
+                opportunity, it can take as little as a week to issue a term
+                sheet.
               </Text>
               <Text style={styles.textTitle}>
                 Even if you are not fundraising at the moment
@@ -237,13 +246,8 @@ export default class Landing extends React.Component<Props> {
                 looking for.
               </Text>
               <Text style={styles.textCopy}>
-                Even if you are not actively fundraising, we use the funding
-                questionnaire to understand your business and give you precise
-                guidance and support.
-              </Text>
-              <Text style={styles.textCopy}>
-                This is about building a relationship for when the time is
-                right.
+                It's never too early: this is about building a relationship for
+                when the time is right.
               </Text>
             </SafeAreaView>
 
@@ -298,7 +302,7 @@ export default class Landing extends React.Component<Props> {
             <SafeAreaView style={styles.contentCopyText}>
               <Text style={styles.textTitle}>Frequently Asked Questions</Text>
 
-              <Text style={styles.textCopy}>Who are InReach Ventures?</Text>
+              <Text style={styles.textFAQ}>Who are InReach Ventures?</Text>
               <Text style={styles.textCopy}>
                 We are a venture capital firm based in London, focused on
                 investing in early stage startups across Europe. Our mission is
@@ -308,7 +312,7 @@ export default class Landing extends React.Component<Props> {
               </Text>
               <br />
 
-              <Text style={styles.textCopy}>
+              <Text style={styles.textFAQ}>
                 What is different about InReach Ventures?
               </Text>
               <Text style={styles.textCopy}>
@@ -322,7 +326,41 @@ export default class Landing extends React.Component<Props> {
               </Text>
               <br />
 
+              <Text style={styles.textFAQ}>What is the team’s background?</Text>
               <Text style={styles.textCopy}>
+                The team has built up over 25 years of experience in start-ups
+                and technology. Between us, we have actively been involved in
+                the startup ecosystem in Europe and the US, both as investors
+                and operators.
+              </Text>
+              <Text style={styles.textCopy}>
+                In particular, prior to InReach Ventures,{' '}
+                <a
+                  target={'_blank'}
+                  href={'https://www.linkedin.com/in/bonanzinga/'}
+                >
+                  Roberto Bonanzinga
+                </a>{' '}
+                (InReach Investment Partner) was an investor in companies, such
+                as Wooga in Berlin (acquired by Playtika), Depop in
+                Milan/London, Contentful in Berlin, Lifecake in London (acquired
+                by Canon), Vivino in Copenhagen, SaatchiArt in London/Los
+                Angeles (acquired by Leaf Group) , Friend.ly in Palo Alto, CA
+                (acquired by Facebook), Mixtent in Palo Alto, CA (acquired by
+                Facebook), Ban.jo in Redwood City CA, Tictail in Stockholm
+                (acquired by Shopify).
+              </Text>
+              <br />
+
+              <Text style={styles.textFAQ}>What is your ticket size?</Text>
+              <Text style={styles.textCopy}>
+                When we invest, our first cheque ranges from between €300k and
+                €2M. Depending on the circumstances, we are very happy to lead,
+                co-lead or follow a lead investor in an investment round.
+              </Text>
+              <br />
+
+              <Text style={styles.textFAQ}>
                 How long does our investment process take from start to finish?
               </Text>
               <Text style={styles.textCopy}>
@@ -337,7 +375,7 @@ export default class Landing extends React.Component<Props> {
               </Text>
               <br />
 
-              <Text style={styles.textCopy}>
+              <Text style={styles.textFAQ}>
                 Why answer the questions in the online funding questionnaire?
               </Text>
               <Text style={styles.textCopy}>
@@ -351,7 +389,7 @@ export default class Landing extends React.Component<Props> {
               </Text>
               <br />
 
-              <Text style={styles.textCopy}>How do you deal with data?</Text>
+              <Text style={styles.textFAQ}>How do you deal with data?</Text>
               <Text style={styles.textCopy}>
                 We will send you a copy of your answers upon completion of the
                 questionnaire. All the data which we collect through the process

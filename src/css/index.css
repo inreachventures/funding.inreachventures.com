@@ -21,3 +21,24 @@ body {
   height: 100%;
   display: flex;
 }
+
+a:link {
+  color: hsl(108, 40%, 47%);
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: hsl(108, 40%, 47%);
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: #0068a4;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
