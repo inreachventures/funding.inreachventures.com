@@ -21,7 +21,6 @@ import {RemoteData} from '../../lib/remoteData';
 import logo from '../../images/logo.png';
 import aaron from '../../images/aaron.png';
 import {IntercomMessenger} from '../IntercomMessenger';
-import {hotjar} from 'react-hotjar';
 
 const styles = StyleSheet.create({
   main: {
@@ -169,7 +168,6 @@ type Props = RouteComponentProps<{}>;
 
 export default class Landing extends React.Component<Props> {
   render() {
-    hotjar.initialize(1479747, 6);
     return (
       <SafeAreaView
         // source={{uri: map}}

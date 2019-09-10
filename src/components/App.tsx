@@ -11,9 +11,12 @@ import Onboarding from './Onboarding';
 import RavenErrorBoundary from './RavenErrorBoundary';
 import Success from './Success';
 import TrackPageViews from './TrackPageViews';
+import {hotjar} from 'react-hotjar';
 
 export default class App extends React.Component {
   render() {
+    hotjar.initialize(1479747, 6);
+
     return (
       <Router>
         <RavenErrorBoundary>
