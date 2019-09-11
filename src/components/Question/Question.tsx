@@ -87,7 +87,6 @@ export default class Question extends React.Component<Props> {
 
   render() {
     const {question, onChange} = this.props;
-
     return (
       <View style={styles.question}>
         <Text style={styles.title}>{question.title}</Text>

@@ -21,6 +21,7 @@ import {RemoteData} from '../../lib/remoteData';
 import logo from '../../images/logo.png';
 import aaron from '../../images/aaron.png';
 import {IntercomMessenger} from '../IntercomMessenger';
+import Question from '../Question';
 
 const styles = StyleSheet.create({
   main: {
@@ -136,6 +137,9 @@ const styles = StyleSheet.create({
   link: {
     textDecorationLine: 'underline',
     color: colors.greenMuted
+  },
+  questionHeader: {
+    borderRadius: 0
   }
 });
 
@@ -157,7 +161,7 @@ function GetStartedButton({form, history}: GetStartedButtonProps) {
         onPress={() => {
           history.push(form.type === 'Success' ? '/form' : '/auth');
         }}
-        title="get started"
+        title="continue"
         color={'#0068A4'}
       />
     </View>
@@ -199,7 +203,37 @@ export default class Landing extends React.Component<Props> {
             <FormConsumer>
               {(f) => (
                 <React.Fragment>
-                  <GetStartedButton form={f} history={this.props.history} />
+                  <SafeAreaView style={styles.questionHeader}>
+                    <Question
+                      question={{
+                        title: 'Get Started',
+                        fields: [
+                          {
+                            name: 'company-details',
+                            type: 'compound',
+                            fields: [
+                              {
+                                name: 'name',
+                                style: 'long',
+                                label: 'Company Name',
+                                type: 'short-text',
+                                value: ''
+                              },
+                              {
+                                name: 'website',
+                                label: 'Website',
+                                placeholder: 'http://example.com',
+                                type: 'uri',
+                                value: ''
+                              }
+                            ]
+                          }
+                        ]
+                      }}
+                      path={[0, 'questions']}
+                    />
+                    <GetStartedButton form={f} history={this.props.history} />
+                  </SafeAreaView>
                 </React.Fragment>
               )}
             </FormConsumer>
