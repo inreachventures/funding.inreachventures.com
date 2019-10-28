@@ -411,7 +411,6 @@ export default class Landing extends React.Component<Props> {
           </SafeAreaView>
           <Terms />
         </ScrollView>
-        <IntercomMessenger />
       </SafeAreaView>
     );
   }
