@@ -29,7 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.0-7",
     "@fortawesome/react-fontawesome": "^0.1.0-11",
     "abortcontroller-polyfill": "^1.1.9",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "ramda": "^0.25.0",
     "raven-js": "^3.26.2",
     "react": "^16.4.0",
