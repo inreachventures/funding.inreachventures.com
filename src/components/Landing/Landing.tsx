@@ -391,8 +391,7 @@ export default class Landing extends React.Component<Props> {
 
               <Text style={styles.textFAQ}>How do you deal with data?</Text>
               <Text style={styles.textCopy}>
-                We will send you a copy of your answers upon completion of the
-                questionnaire. All the data which we collect through the process
+                All the data which we collect through the process
                 is reviewed by a partner and kept in-house solely to assist our
                 qualification process. This data is not shared with any third
                 parties or people outside of the InReach Ventures team or our
