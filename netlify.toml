@@ -18,45 +18,10 @@
   API_HOST = "https://api-dev.funding.inreachventures.com"
 
 [[redirects]]
-  from = "https://funding.inreach.app/*"
-  to = "https://funding.inreachventures.com/:splat"
+  from = "*"
+  to = "https://getfunded.inreachventures.com"
   force = true
   status = 301
-
-[[redirects]]
-  from = "/auth"
-  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=https%3A%2F%2Ffunding.inreachventures.com"
-  query = {token = ":token"}
-  status = 302
-
-[[redirects]]
-  from = "/auth"
-  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=:redirect"
-  query = {redirect = ":redirect", token = ":token"}
-  status = 302
-
-[[redirects]]
-  from = "/auth"
-  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=:redirect"
-  query = {redirect = ":redirect", token = ":token", form_id = ":form_id"}
-  status = 302
-
-[[redirects]]
-  from = "/in"
-  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=https%3A%2F%2Ffunding.inreachventures.com"
-  query = {token = ":token"}
-  status = 302
-
-[[redirects]]
-  from = "/in"
-  to = "https://api.funding.inreachventures.com/auth?token=:token&redirect=:redirect"
-  query = {redirect = ":redirect", token = ":token"}
-  status = 302
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
 
 [[headers]]
   for = "/"
